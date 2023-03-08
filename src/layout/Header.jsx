@@ -48,7 +48,7 @@ function Header() {
   </Link>
   
   <NavContainer>
-  <StyledLink to ="/home">
+  <StyledLink to ="/">
   Accueil
   </StyledLink>
   <StyledLink to ="/about">
