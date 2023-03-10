@@ -24,6 +24,7 @@ function App() {
 
   return (
     <div>
+      {/* TODO : dynamic : text qui dépasse, recentrer les cartes */}
       <Advert img={imgMainPage} text="Chez vous, partout et ailleurs" />
       <CardContainer>
         {data.map((home, index) => (

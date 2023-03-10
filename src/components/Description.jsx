@@ -54,6 +54,10 @@ const TextMain = styled.p`
   text-align: left;
 `;
 
+const TextEquipments = styled.p`
+  list-style-type: none;
+`;
+
 function Description(props) {
   const [descriptionCollapsed, setDescriptionCollapsed] = useState(true);
   const [rotateArrowDescription, setRotateArrowDescription] = useState(90);
@@ -89,11 +93,11 @@ function Description(props) {
             <TextMain>
               {/* TODO : peut être utiliser cette syntaxe pour les erreurs routeur ? */}
               {Array.isArray(content) ? (
-                <ul>
+                <TextEquipments>
                   {content.map((item, index) => (
                     <li key={index}>{item}</li>
                   ))}
-                </ul>
+                </TextEquipments>
               ) : (
                 content
               )}
@@ -106,27 +110,3 @@ function Description(props) {
 }
 
 export default Description;
-
-// <DescriptionStyle>
-// <ContainerEquipments>
-//   <DescriptionTitle>
-//     <TextTitle>
-//       <div> Equipements</div>
-//       <div onClick={toggleEquipmentsCollapse}>
-//         <Arrows
-//           rotate={`${rotateArrowEquipments}`}
-//           width="12"
-//           height="20"
-//         />
-//       </div>
-//     </TextTitle>
-//   </DescriptionTitle>
-//   {!equipmentsCollapsed && (
-//     <TextMain>
-//       {equipments.map((item) => (
-//         <li key={item}>{item}</li>
-//       ))}
-//     </TextMain>
-//   )}
-// </ContainerEquipments>
-// </DescriptionStyle>

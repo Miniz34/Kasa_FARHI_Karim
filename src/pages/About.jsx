@@ -30,7 +30,6 @@ const ContainerImg = styled.img`
 `;
 
 function About() {
-  // TODO : mettre dans un autre fichier ?
   const arrayContent = [
     {
       title: "Fiabilité",

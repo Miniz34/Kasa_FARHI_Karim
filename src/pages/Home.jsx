@@ -65,7 +65,6 @@ const RenterData = styled.div`
     margin-top: 30px;
 `;
 
-//TODO : rendre le width du texte dynamique
 const RenterText = styled.span`
   display: inline;
   font-family: "Montserrat";
@@ -118,16 +117,12 @@ const DescriptionContainer = styled.div`
 `;
 function Home() {
   const getId = useParams();
-  const isValidId = true;
-
   const homeId = getId.id;
-  //TODO : rendre asychrone
   const { data, isLoading } = useFetch("../data.json");
-
-  const [pictureCounter, setPictureCounter] = useState(0); // <-- add state for picture counter
+  const [pictureCounter, setPictureCounter] = useState(0);
 
   useEffect(() => {
-    setPictureCounter(0); // reset picture counter on home change
+    setPictureCounter(0);
   }, [homeId]);
 
   const handlePrevPicture = () => {
