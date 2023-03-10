@@ -32,7 +32,6 @@ const TextTitle = styled.h2`
   margin-right: 25px;
   margin-left: 25px;
   padding-top: 14px;
-  font-family: Montserrat;
   font-size: 18px;
   font-weight: 500;
   line-height: 26px;
@@ -46,7 +45,6 @@ const TextMain = styled.p`
   list-style-type: none;
   margin: 25px 25px 0 25px;
   padding-bottom: 25px;
-  font-family: Montserrat;
   font-size: 18px;
   font-weight: 400;
   line-height: 26px;
@@ -91,7 +89,6 @@ function Description(props) {
           </DescriptionTitle>
           {!descriptionCollapsed && (
             <TextMain>
-              {/* TODO : peut être utiliser cette syntaxe pour les erreurs routeur ? */}
               {Array.isArray(content) ? (
                 <TextEquipments>
                   {content.map((item, index) => (

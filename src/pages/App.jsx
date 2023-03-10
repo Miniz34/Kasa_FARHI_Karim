@@ -5,6 +5,7 @@ import colors from "../utils/styles/colors";
 import Advert from "../components/Advert";
 import { useFetch } from "../utils/hooks/Fetch";
 import imgMainPage from "../assets/ImgMainPage.png";
+import Loading from "../components/Loading";
 
 const CardContainer = styled.div`
   width: 100%;
@@ -14,17 +15,26 @@ const CardContainer = styled.div`
   margin-top: 30%;
   gap: 60px;
   flex-wrap: wrap;
+  @media only screen and (max-width: 1156px) {
+    justify-content: space-around;
+    margin-top: 35%;
+  }
+  @media only screen and (max-width: 700px) {
+    justify-content: center;
+  } ;
 `;
 
 function App() {
   //TODO : demander explications
-  const { data } = useFetch("data.json");
+  const { data, isLoading } = useFetch("data.json");
   const { homeData } = data;
-  console.log(data);
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <div>
-      {/* TODO : dynamic : text qui dépasse, recentrer les cartes */}
       <Advert img={imgMainPage} text="Chez vous, partout et ailleurs" />
       <CardContainer>
         {data.map((home, index) => (

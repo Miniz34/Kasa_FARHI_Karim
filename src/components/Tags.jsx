@@ -8,7 +8,6 @@ const TagsContainer = styled.div`
 `;
 
 const TagsSingle = styled.span`
-  font-family: Montserrat;
   font-size: 14px;
   font-weight: 500;
   line-height: 20px;

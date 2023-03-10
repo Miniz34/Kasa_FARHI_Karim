@@ -2,6 +2,7 @@ import styled from "styled-components";
 import colors from "../utils/styles/colors";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import "../utils/styles/style.css";
 
 const ErrorContainer = styled.div`
   display: flex;
@@ -13,7 +14,6 @@ const ErrorContainer = styled.div`
   justify-content: center;
 `;
 const Error404 = styled.span`
-  font-family: "Monsterrat", "Arial", "Serif";
   font-size: 288px;
   font-weight: 700;
   line-height: 411px;
@@ -23,7 +23,6 @@ const Error404 = styled.span`
 `;
 
 const ErrorMsg = styled.span`
-  font-family: Montserrat;
   font-size: 36px;
   font-weight: 500;
   line-height: 51px;
@@ -32,7 +31,6 @@ const ErrorMsg = styled.span`
 `;
 
 const ErrorRedirect = styled(Link)`
-  font-family: Montserrat;
   font-size: 18px;
   font-weight: 500;
   line-height: 26px;
@@ -44,6 +42,7 @@ const ErrorRedirect = styled(Link)`
 `;
 
 function Error() {
+  console.log(colors.typography);
   return (
     <ErrorContainer>
       <Error404>404</Error404>

@@ -2,6 +2,7 @@ import styled from "styled-components";
 import logo from "../assets/LogoWhite.png";
 import colors from "../utils/styles/colors";
 import textFooter from "../assets/textFooter.png";
+import "../utils/styles/style.css";
 
 const FooterContainer = styled.div`
   background-color: #000000;
@@ -22,7 +23,6 @@ const LogoFooter = styled.img`
 const FooterText = styled.h3`
   color: ${colors.textcards};
   text-align: center;
-  font-family: Montserrat;
   font-size: 24px;
   font-weight: 500;
   line-height: 34px;

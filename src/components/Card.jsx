@@ -21,7 +21,6 @@ const TitleCard = styled.span`
   color: ${colors.textcards};
   display: flex;
   margin-top: auto;
-  font-family: Montserrat;
   font-size: 18px;
   font-weight: 500;
   line-height: 26px;

@@ -1,5 +1,4 @@
 import { useParams } from "react-router-dom";
-import Card from "../components/Card";
 import styled from "styled-components";
 
 import { useEffect, useState } from "react";
@@ -11,6 +10,8 @@ import colors from "../utils/styles/colors";
 import Rating from "../components/Rating";
 import Arrows from "../components/Arrows";
 import Tags from "../components/Tags";
+import Error from "./Error";
+import Loading from "../components/Loading";
 
 const ContainerImg = styled.div`
   position: relative;
@@ -67,7 +68,6 @@ const RenterData = styled.div`
 
 const RenterText = styled.span`
   display: inline;
-  font-family: "Montserrat";
   font-style: normal;
   font-weight: 500;
   font-size: 18px;
@@ -99,7 +99,6 @@ const ArrowContainer = styled.div`
 `;
 
 const ImgCounter = styled.div`
-  font-family: Montserrat;
   font-size: 18px;
   font-weight: 500;
   line-height: 26px;
@@ -131,7 +130,6 @@ function Home() {
     } else {
       setPictureCounter(pictureCounter - 1);
     }
-    console.log("cliquer");
   };
 
   const handleNextPicture = () => {
@@ -140,14 +138,17 @@ function Home() {
     } else {
       setPictureCounter(pictureCounter + 1);
     }
-    console.log("cliquer");
   };
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
   const findHome = data.find((i) => i.id === homeId);
   console.log(pictureCounter);
+
+  if (!findHome) {
+    return <Error />;
+  }
 
   return (
     <div>

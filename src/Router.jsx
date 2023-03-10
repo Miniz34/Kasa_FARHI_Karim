@@ -21,7 +21,6 @@ function Router() {
           <Route path="/about" element={<About />} />
           <Route path="/" element={<App />} />
           <Route path="*" element={<Error />} />
-          {/* TODO: Ajouter les erreurs sur /home/randomid */}
           <Route path="/home/*" element={<Error />} />
         </Routes>
         <Footer />

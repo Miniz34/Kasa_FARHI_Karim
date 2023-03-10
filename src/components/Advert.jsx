@@ -21,12 +21,15 @@ const TextAdvert = styled.h1`
   top: 140px;
   text-align: center;
   color: ${colors.textcards};
-  font-family: "Montserrat";
   font-style: normal;
   font-weight: 500;
   font-size: 48px;
   line-height: 142.6%;
-  z-index: 1000;
+  z-index: 1;
+  @media only screen and (max-width: 800px) {
+    font-size: 36px;
+    top: 110px;
+  }
 `;
 
 function Advert(props) {

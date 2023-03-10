@@ -2,6 +2,9 @@ import styled from "styled-components";
 import img from "../assets/aboutImg.png";
 import Description from "../components/Description";
 import Advert from "../components/Advert";
+import { useEffect, useState } from "react";
+import { useFetch } from "../utils/hooks/Fetch";
+import Loading from "../components/Loading";
 
 const DescriptionContainer = styled.div`
   margin-top: 50px;
@@ -52,6 +55,12 @@ function About() {
         "La sécurité est la priorité de Kasa. Aussi bien pour nos hôtes que pour les voyageurs, chaque logement correspond aux critères de sécurité établis par nos services. En laissant une note aussi bien à l'hôte qu'au locataire, cela permet à nos équipes de vérifier que les standards sont bien respectés. Nous organisons également des ateliers sur la sécurité domestique pour nos hôtes.",
     },
   ];
+
+  const { data, isLoading } = useFetch("../data.json");
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <div>
