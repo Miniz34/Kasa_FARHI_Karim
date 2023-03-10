@@ -13,6 +13,7 @@ const ContainerImg = styled.img`
   margin-top: 4%;
   opacity: 100%;
   filter: brightness(60%);
+  object-fit: cover;
 `;
 
 const TextAdvert = styled.h1`
@@ -28,11 +29,12 @@ const TextAdvert = styled.h1`
   z-index: 1000;
 `;
 
-function Advert() {
+function Advert(props) {
+  const { img, text } = props;
   return (
     <ContainerAdvert>
-      <ContainerImg src={imgMainPage} />
-      <TextAdvert>Chez vous, partout et ailleurs</TextAdvert>
+      <ContainerImg src={img} />
+      {text ? <TextAdvert>{text}</TextAdvert> : null}
     </ContainerAdvert>
   );
 }

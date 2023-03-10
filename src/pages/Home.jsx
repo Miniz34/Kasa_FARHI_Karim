@@ -21,6 +21,7 @@ const MainImg = styled.img`
   max-width: 1440px;
   height: 415px;
   object-fit: cover;
+  border-radius: 25px;
 `;
 
 const ContentContainer = styled.div`
@@ -28,6 +29,10 @@ const ContentContainer = styled.div`
   flex-direction: rows;
   margin-top: 20px;
   color: ${colors.primary};
+  @media only screen and (max-width: 700px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 const LocationContainer = styled.div`
   display: flex;
@@ -39,6 +44,11 @@ const LocationContainer = styled.div`
 const RenterContainer = styled.div`
   display: flex;
   flex-direction: column;
+  @media only screen and (max-width: 700px) {
+    flex-direction: row-reverse;
+    width: 100%;
+    justify-content: space-around;
+
 `;
 
 const RenterData = styled.div`
@@ -48,8 +58,14 @@ const RenterData = styled.div`
   justify-content: flex-end;
   width: 200px;
   height: 64px;
+  @media only screen and (max-width: 700px) {
+    flex-direction: row;
+    width: 100%;
+    justify-content: flex-end;
+    margin-top: 30px;
 `;
 
+//TODO : rendre le width du texte dynamique
 const RenterText = styled.span`
   display: inline;
   font-family: "Montserrat";
@@ -61,6 +77,10 @@ const RenterText = styled.span`
   width: 90px;
   margin-right: 10px;
   text-align: end;
+  @media only screen and (max-width: 700px) {
+    text-align: end;
+    min-width: 90px;
+
 `;
 
 const RenterImg = styled.img`
@@ -89,12 +109,17 @@ const ImgCounter = styled.div`
   color: ${colors.textcards};
 `;
 
-const Test = styled(Rating)`
-  opacity: 0;
+const DescriptionContainer = styled.div`
+  display: flex;
+  gap: 25px;
+  @media only screen and (max-width: 700px) {
+    flex-direction: column;
+    margin-top: 20px
 `;
-
 function Home() {
   const getId = useParams();
+  const isValidId = true;
+
   const homeId = getId.id;
   //TODO : rendre asychrone
   const { data, isLoading } = useFetch("../data.json");
@@ -165,15 +190,21 @@ function Home() {
             <RenterText>{findHome.host.name}</RenterText>
             <RenterImg src={`${findHome.host.picture}`} alt="host" />
           </RenterData>
-          <Test rating={findHome.rating}>{findHome.rating}</Test>
+          <Rating rating={findHome.rating}>{findHome.rating}</Rating>
         </RenterContainer>
       </ContentContainer>
-      <div>
+      <DescriptionContainer>
         <Description
           description={findHome.description}
-          equipments={findHome.equipments}
+          title="Description"
+          content={findHome.description}
         />
-      </div>
+        <Description
+          equipments={findHome.equipments}
+          title="Equipments"
+          content={findHome.equipments}
+        />
+      </DescriptionContainer>
     </div>
   );
 }

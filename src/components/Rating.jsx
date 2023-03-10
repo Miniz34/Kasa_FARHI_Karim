@@ -23,6 +23,9 @@ const RatingContainer = styled.div`
   justify-content: end;
   gap: 5px;
   margin-top: 45px;
+  width: 100%;
+  @media only screen and (max-width: 700px) {
+    justify-content: start;
 `;
 
 const StarIcon = styled.span`

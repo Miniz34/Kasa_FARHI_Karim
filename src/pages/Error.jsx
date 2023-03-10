@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import colors from "../utils/styles/colors";
 import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 const ErrorContainer = styled.div`
   display: flex;

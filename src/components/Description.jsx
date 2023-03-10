@@ -21,12 +21,6 @@ const ContainerDescription = styled.div`
   border-radius: 20px 20px 20px 20px;
 `;
 
-const ContainerEquipments = styled.div`
-  width: 100%;
-  background-color: ${colors.backgroundForLater};
-  border-radius: 20px 20px 20px 20px;
-`;
-
 const DescriptionTitle = styled.div`
   background-color: ${colors.primary};
   border-radius: 10px;
@@ -62,9 +56,7 @@ const TextMain = styled.p`
 
 function Description(props) {
   const [descriptionCollapsed, setDescriptionCollapsed] = useState(true);
-  const [equipmentsCollapsed, setEquipmentsCollapsed] = useState(true);
   const [rotateArrowDescription, setRotateArrowDescription] = useState(90);
-  const [rotateArrowEquipments, setRotateArrowEquipments] = useState(90);
 
   const toggleDescriptionCollapse = () => {
     setDescriptionCollapsed(!descriptionCollapsed);
@@ -75,16 +67,7 @@ function Description(props) {
     }
   };
 
-  const toggleEquipmentsCollapse = () => {
-    setEquipmentsCollapsed(!equipmentsCollapsed);
-    if (equipmentsCollapsed) {
-      setRotateArrowEquipments(270);
-    } else {
-      setRotateArrowEquipments(90);
-    }
-  };
-
-  const { description, equipments } = props;
+  const { description, equipments, title, content } = props;
 
   return (
     <DescriptionContainer>
@@ -92,7 +75,7 @@ function Description(props) {
         <ContainerDescription>
           <DescriptionTitle>
             <TextTitle>
-              <div>Description</div>
+              <div>{title}</div>
               <div onClick={toggleDescriptionCollapse}>
                 <Arrows
                   rotate={`${rotateArrowDescription}`}
@@ -102,34 +85,48 @@ function Description(props) {
               </div>
             </TextTitle>
           </DescriptionTitle>
-          {!descriptionCollapsed && <TextMain>{description}</TextMain>}
-        </ContainerDescription>
-      </DescriptionStyle>
-      <DescriptionStyle>
-        <ContainerEquipments>
-          <DescriptionTitle>
-            <TextTitle>
-              <div> Equipements</div>
-              <div onClick={toggleEquipmentsCollapse}>
-                <Arrows
-                  rotate={`${rotateArrowEquipments}`}
-                  width="12"
-                  height="20"
-                />
-              </div>
-            </TextTitle>
-          </DescriptionTitle>
-          {!equipmentsCollapsed && (
+          {!descriptionCollapsed && (
             <TextMain>
-              {equipments.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
+              {/* TODO : peut être utiliser cette syntaxe pour les erreurs routeur ? */}
+              {Array.isArray(content) ? (
+                <ul>
+                  {content.map((item, index) => (
+                    <li key={index}>{item}</li>
+                  ))}
+                </ul>
+              ) : (
+                content
+              )}
             </TextMain>
           )}
-        </ContainerEquipments>
+        </ContainerDescription>
       </DescriptionStyle>
     </DescriptionContainer>
   );
 }
 
 export default Description;
+
+// <DescriptionStyle>
+// <ContainerEquipments>
+//   <DescriptionTitle>
+//     <TextTitle>
+//       <div> Equipements</div>
+//       <div onClick={toggleEquipmentsCollapse}>
+//         <Arrows
+//           rotate={`${rotateArrowEquipments}`}
+//           width="12"
+//           height="20"
+//         />
+//       </div>
+//     </TextTitle>
+//   </DescriptionTitle>
+//   {!equipmentsCollapsed && (
+//     <TextMain>
+//       {equipments.map((item) => (
+//         <li key={item}>{item}</li>
+//       ))}
+//     </TextMain>
+//   )}
+// </ContainerEquipments>
+// </DescriptionStyle>

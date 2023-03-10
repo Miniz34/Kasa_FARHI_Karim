@@ -4,6 +4,7 @@ import styled from "styled-components";
 import colors from "../utils/styles/colors";
 import Advert from "../components/Advert";
 import { useFetch } from "../utils/hooks/Fetch";
+import imgMainPage from "../assets/ImgMainPage.png";
 
 const CardContainer = styled.div`
   width: 100%;
@@ -23,7 +24,7 @@ function App() {
 
   return (
     <div>
-      <Advert />
+      <Advert img={imgMainPage} text="Chez vous, partout et ailleurs" />
       <CardContainer>
         {data.map((home, index) => (
           <Card key={`${home.id}-${index}`} id={home.id} title={home.title} />
