@@ -12,6 +12,9 @@ const FooterContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 45px;
+  @media only screen and (max-width: 762px) {
+    padding-top: 30px;
+  }
 `;
 const LogoFooter = styled.img`
   height: 40px;
@@ -27,11 +30,6 @@ const FooterText = styled.h3`
   font-weight: 500;
   line-height: 34px;
   letter-spacing: 0em;
-`;
-
-const FooterContent = styled.img`
-  width: 100%;
-  background-color: green;
 `;
 
 function Footer() {

@@ -12,11 +12,19 @@ export const StyledLink = styled(Link)`
   text-decoration: none;
   font-size: 18px;
   text-align: center;
-  ${(props) =>
-    props.$isFullLink &&
-    `color: white; 
-    border-radius: 30px; 
-    background-color: ${colors.primary};`}
+  @media only screen and (max-width: 762px) {
+    font-size: 16px;
+    padding: 0 0;
+  }
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+
+const MainLogo = styled.img`
+  @media only screen and (max-width: 762px) {
+    width: 150px;
+  }
 `;
 
 const HeaderContainer = styled.div`
@@ -30,17 +38,23 @@ const NavContainer = styled.nav`
 display: flex;
 flex-direction: rows;
 align-self: center;
-margin-right : 25px;
+
 gap: 30px;
 text-decoration:
 color: ${colors.primary};
+@media only screen and (max-width: 762px) {
+  gap: 20px;
+ 
+}
+}
+
 `;
 
 function Header() {
   return (
     <HeaderContainer>
       <Link to="/">
-        <img src={logo} alt="logo principal" />
+        <MainLogo src={logo} alt="logo principal" />
       </Link>
 
       <NavContainer>

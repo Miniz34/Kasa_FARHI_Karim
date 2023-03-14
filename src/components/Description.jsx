@@ -17,7 +17,7 @@ const DescriptionStyle = styled.div`
 
 const ContainerDescription = styled.div`
   width: 100%;
-  background-color: ${colors.backgroundForLater};
+  background-color: ${colors.background};
   border-radius: 20px 20px 20px 20px;
 `;
 

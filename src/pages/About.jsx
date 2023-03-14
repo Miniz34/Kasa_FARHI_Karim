@@ -21,17 +21,6 @@ const DescriptionSingle = styled.div`
   gap: 25px;
 `;
 
-const ContainerImg = styled.img`
-  max-width: 1440px;
-  width: 100%;
-  height: 223px;
-  border-radius: 25px;
-  margin-top: 4%;
-  opacity: 100%;
-  filter: brightness(60%);
-  object-fit: cover;
-`;
-
 function About() {
   const arrayContent = [
     {
@@ -64,7 +53,8 @@ function About() {
 
   return (
     <div>
-      <ContainerImg src={img} alt="Bannière" />
+      {/* <ContainerImg src={img} alt="Bannière" /> */}
+      <Advert img={img} />
 
       {/* TODO : fix ce placement incompréhensible */}
       <DescriptionContainer>

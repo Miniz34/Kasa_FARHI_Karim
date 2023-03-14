@@ -5,6 +5,7 @@ const TagsContainer = styled.div`
   display: flex;
   flex-direction: row;
   margin-bottom: 30px;
+  gap: 20px;
 `;
 
 const TagsSingle = styled.span`
@@ -19,9 +20,6 @@ const TagsSingle = styled.span`
 
   background-color: ${colors.primary};
   color: ${colors.textcards};
-  &:not(:last-child) {
-    margin-right: 3%;
-  }
 `;
 
 function Tags(props, text) {
