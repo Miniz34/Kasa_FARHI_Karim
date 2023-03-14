@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/Kasa_FARHI_Karim/static/css/main.807884d2.css",
-    "main.js": "/Kasa_FARHI_Karim/static/js/main.29db2971.js",
+    "main.js": "/Kasa_FARHI_Karim/static/js/main.60a4d586.js",
     "static/js/787.ee42f83d.chunk.js": "/Kasa_FARHI_Karim/static/js/787.ee42f83d.chunk.js",
     "static/media/aboutImg.png": "/Kasa_FARHI_Karim/static/media/aboutImg.640955dab8c7bff25514.png",
     "static/media/ImgMainPage.png": "/Kasa_FARHI_Karim/static/media/ImgMainPage.436892d1a6d8aa062e5c.png",
@@ -9,12 +9,13 @@
     "static/media/LOGO.svg": "/Kasa_FARHI_Karim/static/media/LOGO.bb1c78bdbf97911cf6044e13e0c4f670.svg",
     "index.html": "/Kasa_FARHI_Karim/index.html",
     "static/media/Arrow.svg": "/Kasa_FARHI_Karim/static/media/Arrow.88153a5d119c2744ffe34dca1ef843df.svg",
+    "static/media/Star.svg": "/Kasa_FARHI_Karim/static/media/Star.5fba0fc5503829f117b00b53bc4dc5e8.svg",
     "main.807884d2.css.map": "/Kasa_FARHI_Karim/static/css/main.807884d2.css.map",
-    "main.29db2971.js.map": "/Kasa_FARHI_Karim/static/js/main.29db2971.js.map",
+    "main.60a4d586.js.map": "/Kasa_FARHI_Karim/static/js/main.60a4d586.js.map",
     "787.ee42f83d.chunk.js.map": "/Kasa_FARHI_Karim/static/js/787.ee42f83d.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.807884d2.css",
-    "static/js/main.29db2971.js"
+    "static/js/main.60a4d586.js"
   ]
 }
