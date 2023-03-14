@@ -40,6 +40,7 @@ const ContainerImg = styled.img`
   width: 100%;
   filter: brightness(60%);
   border-radius: 10px;
+  object-fit: cover;
 `;
 
 const TitleCard = styled.span`

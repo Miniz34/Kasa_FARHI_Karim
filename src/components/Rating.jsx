@@ -1,3 +1,4 @@
+import star from "../assets/Star.svg";
 import styled from "styled-components";
 import colors from "../utils/styles/colors";
 
@@ -23,7 +24,7 @@ const RatingContainer = styled.div`
   gap: 5px;
   margin-top: 45px;
   width: 100%;
-  @media only screen and (max-width: 700px) {
+  @media only screen and (max-width: 740px) {
     justify-content: start;
 `;
 
@@ -36,7 +37,7 @@ const StarIcon = styled.span`
 const StarEmpty = styled.span`
   width: 30px;
   height: 30px;
-  color: ${colors.backgroundForLater};
+  color: ${colors.background};
 `;
 
 function Rating({ rating }) {

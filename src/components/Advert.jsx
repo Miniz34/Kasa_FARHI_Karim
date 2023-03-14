@@ -9,7 +9,7 @@ const ContainerAdvert = styled.div`
   height: 223px;
   border-radius: 25px;
   overflow: hidden;
-  margin-top: 4%;
+  margin-top: 60px;
 `;
 
 const ContainerImg = styled.img`
@@ -36,7 +36,7 @@ const TextAdvert = styled.h1`
   font-size: clamp(32px, 3vw, 48px);
   z-index: 1;
   @media only screen and (max-width: 762px) {
-    transform: translate(-60%, -50%);
+    transform: translate(-60%%, -50%);
     white-space: pre-wrap;
     width: 80%;
   }

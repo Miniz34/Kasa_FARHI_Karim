@@ -15,6 +15,7 @@ import Loading from "../components/Loading";
 
 const ContainerImg = styled.div`
   position: relative;
+  margin-top: 60px;
 `;
 
 const fadeInUp = keyframes`
@@ -45,7 +46,7 @@ const ContentContainer = styled.div`
   flex-direction: rows;
   margin-top: 20px;
   color: ${colors.primary};
-  @media only screen and (max-width: 700px) {
+  @media only screen and (max-width: 740px) {
     flex-direction: column;
     align-items: center;
   }
@@ -60,7 +61,7 @@ const LocationContainer = styled.div`
 const RenterContainer = styled.div`
   display: flex;
   flex-direction: column;
-  @media only screen and (max-width: 700px) {
+  @media only screen and (max-width: 740px) {
     flex-direction: row-reverse;
     width: 100%;
     justify-content: space-around;
@@ -74,7 +75,7 @@ const RenterData = styled.div`
   justify-content: flex-end;
   width: 200px;
   height: 64px;
-  @media only screen and (max-width: 700px) {
+  @media only screen and (max-width: 740px) {
     flex-direction: row;
     width: 100%;
     justify-content: flex-end;
@@ -91,7 +92,7 @@ const RenterText = styled.span`
   width: 90px;
   margin-right: 10px;
   text-align: end;
-  @media only screen and (max-width: 700px) {
+  @media only screen and (max-width: 740px) {
     font-size: 14px;
     text-align: end;
     min-width: 90px;
@@ -102,7 +103,7 @@ const RenterImg = styled.img`
   width: 64px;
   height: 64px;
   border-radius: 50%;
-  @media only screen and (max-width: 700px) {
+  @media only screen and (max-width: 740px) {
     width: 46px;
     height: 46px;
   }
@@ -126,7 +127,7 @@ const ImgCounter = styled.div`
 const DescriptionContainer = styled.div`
   display: flex;
   gap: 25px;
-  @media only screen and (max-width: 700px) {
+  @media only screen and (max-width: 740px) {
     flex-direction: column;
     margin-top: 20px
 `;
