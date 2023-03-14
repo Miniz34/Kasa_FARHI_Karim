@@ -9,6 +9,7 @@ const ErrorContainer = styled.div`
   flex-direction: column;
   flex-wrap: wrap;
   text-align: center;
+  margin-top: 277px;
   color: ${colors.primary};
   height: 100%;
   justify-content: center;
