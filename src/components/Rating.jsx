@@ -1,4 +1,3 @@
-import star from "../assets/Star.svg";
 import styled from "styled-components";
 import colors from "../utils/styles/colors";
 

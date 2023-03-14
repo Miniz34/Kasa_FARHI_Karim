@@ -27,7 +27,7 @@ const Wrapper = styled.div`
 function Router() {
   return (
     <React.StrictMode>
-      <BrowserRouter basename="/Kasa">
+      <BrowserRouter basename="/Kasa_FARHI_Karim">
         {/* TODO : creer bannière pour "/" et page about */}
         <Wrapper>
           <Header />

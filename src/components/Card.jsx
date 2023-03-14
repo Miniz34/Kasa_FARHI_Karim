@@ -7,6 +7,7 @@ const LinkCard = styled(Link)`
   flex-direction: column;
   width: clamp(280px, 30%, 340px);
   height: 340px;
+  text-decoration: none;
 
   background: linear-gradient(180deg, #ffffff00 0%, #00000080 100%);
   background-color: ${colors.primary};
@@ -19,7 +20,6 @@ const LinkCard = styled(Link)`
     width: 100%;
     left: 0px;
     top: 0px;
-    border-radius: 10px;
   }
   &:hover {
     transform: scale(1.02);
@@ -31,6 +31,15 @@ const ContainerCard = styled.div`
   display: flex;
   flex-direction: column-reverse;
   height: 100%;
+  position: relative;
+`;
+
+const ContainerImg = styled.img`
+  height: 100%;
+  position: absolute;
+  width: 100%;
+  filter: brightness(60%);
+  border-radius: 10px;
 `;
 
 const TitleCard = styled.span`
@@ -43,12 +52,17 @@ const TitleCard = styled.span`
   letter-spacing: 0em;
   text-align: left;
   margin: auto 0px 15px 15px;
+  z-index: 1000;
 `;
 
 function Card({ title, id, picture }) {
   return (
     <LinkCard to={`/home/${id}`}>
       <ContainerCard className="ContainerCard">
+        <ContainerImg
+          src={picture}
+          alt="minituature de l'appartement"
+        ></ContainerImg>
         <TitleCard>{title}</TitleCard>
       </ContainerCard>
     </LinkCard>

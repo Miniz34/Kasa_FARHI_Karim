@@ -4,6 +4,7 @@ import styled from "styled-components";
 const RotatedArrow = styled.svg`
   cursor: pointer;
   transition: transform 0.3s ease-in-out;
+  user-select: none;
 `;
 
 function Arrows({ rotate, height, width }) {

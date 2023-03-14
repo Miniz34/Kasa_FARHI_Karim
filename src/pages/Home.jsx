@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 import { useEffect, useState } from "react";
 
@@ -17,12 +17,27 @@ const ContainerImg = styled.div`
   position: relative;
 `;
 
+const fadeInUp = keyframes`
+  from {
+    opacity: 0.5;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+`;
+
 const MainImg = styled.img`
   width: 100%;
   max-width: 1440px;
   height: 415px;
   object-fit: cover;
   border-radius: 25px;
+  opacity: 1;
+  transform: scale(1);
+  animation: ${({ animate }) => (animate ? fadeInUp : "none")} 0.5s ease-in-out
+    forwards;
 `;
 
 const ContentContainer = styled.div`
@@ -77,6 +92,7 @@ const RenterText = styled.span`
   margin-right: 10px;
   text-align: end;
   @media only screen and (max-width: 700px) {
+    font-size: 14px;
     text-align: end;
     min-width: 90px;
 
@@ -86,17 +102,17 @@ const RenterImg = styled.img`
   width: 64px;
   height: 64px;
   border-radius: 50%;
+  @media only screen and (max-width: 700px) {
+    width: 46px;
+    height: 46px;
+  }
 `;
 
 const Arrow = styled(Arrows)`
   fill: black;
 `;
 
-const ArrowContainer = styled.div`
-  // position: absolute;
-  // right: 40px;
-  // top: 40px;
-`;
+const ArrowContainer = styled.div``;
 
 const ImgCounter = styled.div`
   font-size: 18px;
@@ -114,11 +130,13 @@ const DescriptionContainer = styled.div`
     flex-direction: column;
     margin-top: 20px
 `;
+
 function Home() {
   const getId = useParams();
   const homeId = getId.id;
   const { data, isLoading } = useFetch("../data.json");
   const [pictureCounter, setPictureCounter] = useState(0);
+  const [animate, setAnimate] = useState(true);
 
   useEffect(() => {
     setPictureCounter(0);
@@ -127,16 +145,20 @@ function Home() {
   const handlePrevPicture = () => {
     if (pictureCounter === 0) {
       setPictureCounter(findHome.pictures.length - 1);
+      setAnimate(true);
     } else {
       setPictureCounter(pictureCounter - 1);
+      setAnimate(true);
     }
   };
 
   const handleNextPicture = () => {
     if (pictureCounter === findHome.pictures.length - 1) {
       setPictureCounter(0);
+      setAnimate(true);
     } else {
       setPictureCounter(pictureCounter + 1);
+      setAnimate(true);
     }
   };
 
@@ -145,6 +167,10 @@ function Home() {
   }
   const findHome = data.find((i) => i.id === homeId);
   console.log(pictureCounter);
+
+  const handleAnimationEnd = () => {
+    setAnimate(false);
+  };
 
   if (!findHome) {
     return <Error />;
@@ -156,6 +182,8 @@ function Home() {
         <MainImg
           src={`${findHome.pictures[pictureCounter]}`}
           alt="Appartement"
+          animate={animate}
+          onAnimationEnd={handleAnimationEnd}
         />
         <ArrowContainer
           style={{ position: "absolute", left: "10px", top: "150px" }}

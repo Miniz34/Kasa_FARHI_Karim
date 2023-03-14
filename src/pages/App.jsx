@@ -28,7 +28,12 @@ const CardContainer = styled.div`
 
 function App() {
   //TODO : demander explications
-  const { data, isLoading } = useFetch("data.json");
+  // const { data, isLoading } = useFetch("data.json");
+  const { data, isLoading } = useFetch(
+    window.location.origin + "/Kasa_FARHI_Karim/data.json"
+  );
+  console.log(data);
+
   const { homeData } = data;
 
   if (isLoading) {
@@ -40,7 +45,12 @@ function App() {
       <Advert img={imgMainPage} text="Chez vous, partout et ailleurs" />
       <CardContainer>
         {data.map((home, index) => (
-          <Card key={`${home.id}-${index}`} id={home.id} title={home.title} />
+          <Card
+            key={`${home.id}-${index}`}
+            id={home.id}
+            title={home.title}
+            picture={home.pictures[0]}
+          />
         ))}
       </CardContainer>
     </>
