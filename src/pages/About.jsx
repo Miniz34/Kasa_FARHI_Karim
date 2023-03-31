@@ -1,8 +1,9 @@
+import React from "react";
+
 import styled from "styled-components";
 import img from "../assets/aboutImg.png";
 import Description from "../components/Description";
 import Advert from "../components/Advert";
-import { useEffect, useState } from "react";
 import { useFetch } from "../utils/hooks/Fetch";
 import Loading from "../components/Loading";
 
@@ -45,7 +46,7 @@ function About() {
     },
   ];
 
-  const { data, isLoading } = useFetch("../data.json");
+  const { isLoading } = useFetch("../data.json");
 
   if (isLoading) {
     return <Loading />;
@@ -56,7 +57,6 @@ function About() {
       {/* <ContainerImg src={img} alt="Bannière" /> */}
       <Advert img={img} />
 
-      {/* TODO : fix ce placement incompréhensible */}
       <DescriptionContainer>
         <DescriptionSingle>
           {arrayContent.map((i, index) => (

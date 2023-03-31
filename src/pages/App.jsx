@@ -32,9 +32,6 @@ function App() {
   const { data, isLoading } = useFetch(
     window.location.origin + "/Kasa_FARHI_Karim/data.json"
   );
-  console.log(data);
-
-  const { homeData } = data;
 
   if (isLoading) {
     return <Loading />;

@@ -14,6 +14,7 @@ export function useFetch(url) {
         const response = await fetch(url);
         const dataHome = await response.json();
         setData((current) => (current = dataHome));
+        console.log(dataHome);
       } catch (err) {
         console.log(err);
         setError(true);
@@ -25,19 +26,3 @@ export function useFetch(url) {
   }, [url]);
   return { data, isLoading, error };
 }
-
-// export function useFetch(url) {
-
-//   const [data, setData] = useState([])
-//   useEffect(() => {
-
-//     if (!url) return
-//     async function fetchData() {
-//       fetch(url)
-//       .then(response => response.json())
-//       .then(dataHome => setData(current => current = dataHome))
-//     }
-//     fetchData()
-//   }, [url])
-//   return {data}
-// }
