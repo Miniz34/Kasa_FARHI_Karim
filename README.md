@@ -2,7 +2,7 @@
 
 ## 1. Live Website
 
-[Site](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack).
+[Site](https://miniz34.github.io/Kasa_FARHI_Karim/)
 
 ## 2. Install package
 
