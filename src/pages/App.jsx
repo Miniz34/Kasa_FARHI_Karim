@@ -5,6 +5,7 @@ import Banner from "../components/Banner";
 import { useFetch } from "../utils/hooks/Fetch";
 import imgMainPage from "../assets/ImgMainPage.png";
 import Loading from "../components/Loading";
+import Gallery from "../components/Gallery";
 
 const CardContainer = styled.div`
   display: flex;
@@ -41,6 +42,8 @@ function App() {
   if (isLoading) {
     return <Loading />;
   }
+
+  console.log(data);
 
   return (
     <>

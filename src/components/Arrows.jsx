@@ -1,4 +1,3 @@
-import Arrow from "../assets/Arrow.svg";
 import styled from "styled-components";
 
 const RotatedArrow = styled.svg`

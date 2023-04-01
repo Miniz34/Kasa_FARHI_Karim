@@ -113,7 +113,7 @@ function Gallery({ img, id }) {
         <ImgCounter
           style={{ position: "absolute", left: "47%", bottom: "10px" }}
         >
-          {pictureCounter + 1} /{img.length}
+          {pictureCounter + 1} / {img.length}
         </ImgCounter>
       </ContainerImg>
     </div>
