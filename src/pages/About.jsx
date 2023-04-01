@@ -2,10 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import img from "../assets/aboutImg.png";
 import Description from "../components/Description";
-import Advert from "../components/Banner";
-import Gallery from "../components/Gallery";
-// import { useFetch../components/Banneroks/Fetch";
-// import Loading from "../components/Loading";
+import Banner from "../components/Banner";
 
 const DescriptionContainer = styled.div`
   margin-top: 50px;
@@ -53,8 +50,7 @@ function About() {
 
   return (
     <div>
-      <Advert img={img} />
-
+      <Banner img={img} />
       <DescriptionContainer>
         <DescriptionSingle>
           {arrayContent.map((i, index) => (

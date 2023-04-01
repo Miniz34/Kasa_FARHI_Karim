@@ -12,11 +12,6 @@ import Tags from "../components/Tags";
 import Error from "./Error";
 import Loading from "../components/Loading";
 
-const ContainerImg = styled.div`
-  position: relative;
-  margin-top: 60px;
-`;
-
 const ContentContainer = styled.div`
   display: flex;
   flex-direction: rows;
@@ -109,9 +104,7 @@ function Home() {
 
   return (
     <div>
-      <ContainerImg>
-        <Gallery img={findHome.pictures} id={homeId} />
-      </ContainerImg>
+      <Gallery img={findHome.pictures} id={homeId} />
       <ContentContainer>
         <LocationContainer>
           <h1>{findHome.title}</h1>

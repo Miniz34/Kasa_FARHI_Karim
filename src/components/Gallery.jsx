@@ -1,8 +1,12 @@
 import styled, { keyframes } from "styled-components";
 import Arrows from "./Arrows";
-import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import colors from "../utils/styles/colors";
+
+const ContainerImg = styled.div`
+  position: relative;
+  margin-top: 60px;
+`;
 
 const Arrow = styled(Arrows)`
   fill: black;
@@ -87,27 +91,31 @@ function Gallery({ img, id }) {
 
   return (
     <div>
-      <MainImg
-        src={`${img[pictureCounter]}`}
-        alt="Appartement"
-        animate={animate}
-        onAnimationEnd={handleAnimationEnd}
-      />
-      <ArrowContainer
-        style={{ position: "absolute", left: "10px", top: "150px" }}
-        onClick={handlePrevPicture}
-      >
-        <Arrow rotate="180" width="48" height="80" />
-      </ArrowContainer>
-      <ArrowContainer
-        style={{ position: "absolute", right: "10px", top: "150px" }}
-        onClick={handleNextPicture}
-      >
-        <Arrow rotate="0" width="48" height="80" />
-      </ArrowContainer>
-      <ImgCounter style={{ position: "absolute", left: "47%", bottom: "10px" }}>
-        {pictureCounter + 1} /{img.length}
-      </ImgCounter>
+      <ContainerImg>
+        <MainImg
+          src={`${img[pictureCounter]}`}
+          alt="Appartement"
+          animate={animate}
+          onAnimationEnd={handleAnimationEnd}
+        />
+        <ArrowContainer
+          style={{ position: "absolute", left: "10px", top: "150px" }}
+          onClick={handlePrevPicture}
+        >
+          <Arrow rotate="180" width="48" height="80" />
+        </ArrowContainer>
+        <ArrowContainer
+          style={{ position: "absolute", right: "10px", top: "150px" }}
+          onClick={handleNextPicture}
+        >
+          <Arrow rotate="0" width="48" height="80" />
+        </ArrowContainer>
+        <ImgCounter
+          style={{ position: "absolute", left: "47%", bottom: "10px" }}
+        >
+          {pictureCounter + 1} /{img.length}
+        </ImgCounter>
+      </ContainerImg>
     </div>
   );
 }
