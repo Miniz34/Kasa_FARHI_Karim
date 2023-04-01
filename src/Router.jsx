@@ -7,7 +7,6 @@ import Home from "./pages/Home";
 import Error from "./pages/Error";
 import About from "./pages/About";
 import styled from "styled-components";
-
 import Header from "./layout/Header";
 import Footer from "./layout/Footer";
 
@@ -28,13 +27,12 @@ function Router() {
   return (
     <React.StrictMode>
       <BrowserRouter basename="/Kasa_FARHI_Karim">
-        {/* TODO : creer bannière pour "/" et page about */}
         <Wrapper>
           <Header />
           <Routes>
+            <Route path="/" element={<App />} />
             <Route path="/home/:id" element={<Home />} />
             <Route path="/about" element={<About />} />
-            <Route path="/" element={<App />} />
             <Route path="*" element={<Error />} />
             <Route path="/home/*" element={<Error />} />
           </Routes>
@@ -44,5 +42,4 @@ function Router() {
     </React.StrictMode>
   );
 }
-
 export default Router;

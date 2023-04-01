@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import imgMainPage from "../assets/ImgMainPage.png";
 import colors from "../utils/styles/colors";
 
 const ContainerAdvert = styled.div`
@@ -42,7 +41,7 @@ const TextAdvert = styled.h1`
   }
 `;
 
-function Advert({ img, text }) {
+function Banner({ img, text }) {
   return (
     <ContainerAdvert>
       <ContainerImg src={img} />
@@ -51,4 +50,4 @@ function Advert({ img, text }) {
   );
 }
 
-export default Advert;
+export default Banner;

@@ -1,11 +1,11 @@
 import React from "react";
-
 import styled from "styled-components";
 import img from "../assets/aboutImg.png";
 import Description from "../components/Description";
-import Advert from "../components/Advert";
-import { useFetch } from "../utils/hooks/Fetch";
-import Loading from "../components/Loading";
+import Advert from "../components/Banner";
+import Gallery from "../components/Gallery";
+// import { useFetch../components/Banneroks/Fetch";
+// import Loading from "../components/Loading";
 
 const DescriptionContainer = styled.div`
   margin-top: 50px;
@@ -46,26 +46,19 @@ function About() {
     },
   ];
 
-  const { isLoading } = useFetch("../data.json");
-
-  if (isLoading) {
-    return <Loading />;
-  }
+  // const { data, isLoading } = useFetch("../data.json");
+  // if (isLoading) {
+  //   return <Loading />;
+  // }
 
   return (
     <div>
-      {/* <ContainerImg src={img} alt="Bannière" /> */}
       <Advert img={img} />
 
       <DescriptionContainer>
         <DescriptionSingle>
           {arrayContent.map((i, index) => (
-            <Description
-              key={`${index}`}
-              style={{ width: "75%" }}
-              title={i.title}
-              content={i.content}
-            />
+            <Description key={`${index}`} title={i.title} content={i.content} />
           ))}
         </DescriptionSingle>
       </DescriptionContainer>

@@ -31,11 +31,6 @@ function Tags(props, text) {
       {tags.map((tag, index) => (
         <TagsSingle key={`${index}`}> {tag}</TagsSingle>
       ))}
-      {/* <CardContainer>
-        {data.map((home, index) => (
-          <Card key={`${home.id}-${index}`} id={home.id} title={home.title} />
-        ))}
-      </CardContainer> */}
     </TagsContainer>
   );
 }

@@ -1,7 +1,6 @@
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 import colors from "../utils/styles/colors";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Arrows from "./Arrows";
 
 const DescriptionContainer = styled.div`
@@ -56,10 +55,14 @@ const TextEquipments = styled.p`
   list-style-type: none;
 `;
 
-function Description(props) {
+function Description({ title, content }) {
   const [descriptionCollapsed, setDescriptionCollapsed] = useState(true);
   const [rotateArrowDescription, setRotateArrowDescription] = useState(90);
 
+  /**
+   * If the description is collapsed, then rotate the arrow 270 degrees. If the description is not
+   * collapsed, then rotate the arrow 90 degrees.
+   */
   const toggleDescriptionCollapse = () => {
     setDescriptionCollapsed(!descriptionCollapsed);
     if (descriptionCollapsed) {
@@ -68,8 +71,6 @@ function Description(props) {
       setRotateArrowDescription(90);
     }
   };
-
-  const { description, equipments, title, content } = props;
 
   return (
     <DescriptionContainer>

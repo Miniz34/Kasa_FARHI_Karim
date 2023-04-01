@@ -1,8 +1,7 @@
 import Card from "../components/Card";
-import { useEffect, useState } from "react";
 import styled from "styled-components";
 import colors from "../utils/styles/colors";
-import Advert from "../components/Advert";
+import Banner from "../components/Banner";
 import { useFetch } from "../utils/hooks/Fetch";
 import imgMainPage from "../assets/ImgMainPage.png";
 import Loading from "../components/Loading";
@@ -25,10 +24,16 @@ const CardContainer = styled.div`
     background-color: #ffffff;
   }
 `;
-
+/**
+ * We use the useFetch hook to fetch data from the data.json file. *
+ * If the data is still loading, we display a loading component. *
+ * If the data is loaded, we display an advert component and a card container component.
+ * The card container component displays a card component for each home in the data.
+ * It's a function that returns a loading component if the data is still loading, otherwise it returns
+ * a card container with cards inside
+ * @returns a JSX element.
+ */
 function App() {
-  //TODO : demander explications
-  // const { data, isLoading } = useFetch("data.json");
   const { data, isLoading } = useFetch(
     window.location.origin + "/Kasa_FARHI_Karim/data.json"
   );
@@ -39,7 +44,7 @@ function App() {
 
   return (
     <>
-      <Advert img={imgMainPage} text="Chez vous, partout et ailleurs" />
+      <Banner img={imgMainPage} text="Chez vous, partout et ailleurs" />
       <CardContainer>
         {data.map((home, index) => (
           <Card
@@ -55,14 +60,3 @@ function App() {
 }
 
 export default App;
-
-// const [data, setData] = useState([])
-
-// useEffect(()=> {
-//   const f = ()=>{
-//     fetch('data.json')
-//     .then(response => response.json())
-//     .then(dataHome => setData(current => current = dataHome))
-//   }
-//   f()
-// }, [])
