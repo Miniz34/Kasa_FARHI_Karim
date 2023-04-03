@@ -34,7 +34,7 @@ function Router() {
             <Route path="/home/:id" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="*" element={<Error />} />
-            <Route path="/home/*" element={<Error />} />
+            {/* <Route path="/home/*" element={<Error />} /> */}
           </Routes>
           <Footer />
         </Wrapper>

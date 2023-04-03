@@ -1,4 +1,3 @@
-import styled from "styled-components";
 import Error from "../pages/Error";
 import React, { useState, useEffect } from "react";
 import loading from "../assets/loading.gif";

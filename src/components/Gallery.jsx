@@ -98,23 +98,27 @@ function Gallery({ img, id }) {
           animate={animate}
           onAnimationEnd={handleAnimationEnd}
         />
-        <ArrowContainer
-          style={{ position: "absolute", left: "10px", top: "150px" }}
-          onClick={handlePrevPicture}
-        >
-          <Arrow rotate="180" width="48" height="80" />
-        </ArrowContainer>
-        <ArrowContainer
-          style={{ position: "absolute", right: "10px", top: "150px" }}
-          onClick={handleNextPicture}
-        >
-          <Arrow rotate="0" width="48" height="80" />
-        </ArrowContainer>
-        <ImgCounter
-          style={{ position: "absolute", left: "47%", bottom: "10px" }}
-        >
-          {pictureCounter + 1} / {img.length}
-        </ImgCounter>
+        {img.length === 1 ? null : (
+          <>
+            <ArrowContainer
+              style={{ position: "absolute", left: "10px", top: "150px" }}
+              onClick={handlePrevPicture}
+            >
+              <Arrow rotate="180" width="48" height="80" />
+            </ArrowContainer>
+            <ArrowContainer
+              style={{ position: "absolute", right: "10px", top: "150px" }}
+              onClick={handleNextPicture}
+            >
+              <Arrow rotate="0" width="48" height="80" />
+            </ArrowContainer>
+            <ImgCounter
+              style={{ position: "absolute", left: "47%", bottom: "10px" }}
+            >
+              {pictureCounter + 1} / {img.length}
+            </ImgCounter>
+          </>
+        )}
       </ContainerImg>
     </div>
   );
