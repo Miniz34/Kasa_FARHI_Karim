@@ -98,7 +98,7 @@ function Gallery({ img, id }) {
           animate={animate}
           onAnimationEnd={handleAnimationEnd}
         />
-        {img.length === 1 ? null : (
+        {img.length < 2 ? null : (
           <>
             <ArrowContainer
               style={{ position: "absolute", left: "10px", top: "150px" }}
