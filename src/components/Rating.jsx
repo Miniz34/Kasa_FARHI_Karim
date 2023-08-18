@@ -40,9 +40,15 @@ const StarEmpty = styled.span`
   color: ${colors.background};
 `;
 
+//TODO : console.log(typeof(rating)) returns string
+// Soit je type string et je parseint, soit je type number et ça fonctionne quand même ?
+// interface RatingProps {
+//   rating: string;
+// }
+
 function Rating({ rating }) {
   const stars = [];
-  for (let i = 0; i < rating; i++) {
+  for (let i = 0; i < parseInt(rating); i++) {
     stars.push(<StarIcon key={i}>{starSvg}</StarIcon>);
   }
 

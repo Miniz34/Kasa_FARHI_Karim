@@ -38,6 +38,8 @@ function App() {
     window.location.origin + "/Kasa_FARHI_Karim/data.json"
   );
 
+  console.log(data);
+
   if (isLoading) {
     return <Loading />;
   }

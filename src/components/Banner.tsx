@@ -41,7 +41,12 @@ const TextAdvert = styled.h1`
   }
 `;
 
-function Banner({ img, text }) {
+interface BannerProps {
+  img: string;
+  text: string;
+}
+
+function Banner({ img, text }: BannerProps) {
   return (
     <ContainerAdvert>
       <ContainerImg src={img} />

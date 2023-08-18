@@ -56,7 +56,13 @@ const TitleCard = styled.span`
   z-index: 1000;
 `;
 
-function Card({ title, id, picture }) {
+interface CardProps {
+  title: string;
+  id: string;
+  picture: string;
+}
+
+function Card({ title, id, picture }: CardProps) {
   return (
     <LinkCard to={`/home/${id}`}>
       <ContainerCard className="ContainerCard">

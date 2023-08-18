@@ -55,7 +55,12 @@ const TextEquipments = styled.p`
   list-style-type: none;
 `;
 
-function Description({ title, content }) {
+interface DescriptionProps {
+  title: string;
+  content: string;
+}
+
+function Description({ title, content }: DescriptionProps) {
   const [descriptionCollapsed, setDescriptionCollapsed] = useState(true);
   const [rotateArrowDescription, setRotateArrowDescription] = useState(90);
 

@@ -22,10 +22,11 @@ const TagsSingle = styled.span`
   color: ${colors.textcards};
 `;
 
-function Tags(props, text) {
-  const { tags } = props;
-  console.log(tags[0]);
+interface TagsProps {
+  tags: string[];
+}
 
+const Tags: React.FC<TagsProps> = ({ tags }) => {
   return (
     <TagsContainer>
       {tags.map((tag, index) => (
@@ -33,6 +34,6 @@ function Tags(props, text) {
       ))}
     </TagsContainer>
   );
-}
+};
 
 export default Tags;

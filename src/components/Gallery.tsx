@@ -34,7 +34,7 @@ const fadeInUp = keyframes`
   }
 `;
 
-const MainImg = styled.img`
+const MainImg = styled.img<{ animate?: boolean }>`
   width: 100%;
   max-width: 1440px;
   height: 415px;
@@ -46,9 +46,17 @@ const MainImg = styled.img`
     forwards;
 `;
 
-function Gallery({ img, id }) {
+interface GalleryProps {
+  img: [string];
+  id: string;
+}
+
+function Gallery({ img, id }: GalleryProps) {
   const [pictureCounter, setPictureCounter] = useState(0);
   const [animate, setAnimate] = useState(true);
+
+  console.log(typeof img);
+  console.log(typeof id);
 
   console.log(pictureCounter);
   /* Resetting the pictureCounter to 0 when the homeId changes. */

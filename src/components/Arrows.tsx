@@ -6,7 +6,13 @@ const RotatedArrow = styled.svg`
   user-select: none;
 `;
 
-function Arrows({ rotate, height, width }) {
+interface ArrowsProps {
+  rotate: number | string;
+  height: number | string;
+  width: number | string;
+}
+
+function Arrows({ rotate, height, width }: ArrowsProps) {
   return (
     <RotatedArrow
       viewBox="0 0 48 80"
