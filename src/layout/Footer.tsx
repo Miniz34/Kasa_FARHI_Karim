@@ -20,7 +20,7 @@ const LogoFooter = styled.img`
   height: 40px;
   width: 122px;
   align-self: center;
-  margin-top: 4%; ;
+  margin-top: 4%;
 `;
 
 const FooterText = styled.h3`

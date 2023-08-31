@@ -11,6 +11,7 @@ import Rating from "../components/Rating";
 import Tags from "../components/Tags";
 import Error from "./Error";
 import Loading from "../components/Loading";
+import RatingProps from "../components/Rating";
 
 const ContentContainer = styled.div`
   display: flex;
@@ -88,51 +89,34 @@ const DescriptionContainer = styled.div`
     margin-top: 20px
 `;
 
-function Home() {
-  const getId = useParams();
-  const homeId = getId.id;
-  const { data, isLoading } = useFetch("../data.json");
+function TestBack() {
+  const { data, isLoading } = useFetch(
+    process.env.REACT_APP_API_URL_DEV + "/house/getall"
+  );
 
-  if (isLoading) {
-    return <Loading />;
-  }
-  const findHome = data.find((i) => i.id === homeId);
+  console.log(data);
+
+  const findHome = data.find((e) => e._id === "64eb923c45e4ff59665ace47");
+  console.log(findHome);
 
   if (!findHome) {
     return <Error />;
   }
 
   return (
-    <div>
-      <Gallery img={findHome.pictures} id={homeId} />
-      <ContentContainer>
-        <LocationContainer>
-          <h1>{findHome.title}</h1>
-          <h2>{findHome.location}</h2>
-          <Tags tags={findHome.tags} />
-        </LocationContainer>
-        <RenterContainer>
-          <RenterData>
-            <RenterText>{findHome.host.name}</RenterText>
-            <RenterImg src={`${findHome.host.picture}`} alt="host" />
-          </RenterData>
-          <Rating rating={findHome.rating}>{findHome.rating}</Rating>
-        </RenterContainer>
-      </ContentContainer>
-      <DescriptionContainer>
-        <Description
-          description={findHome.description}
-          title="Description"
-          content={findHome.description}
-        />
-        <Description
-          equipments={findHome.equipments}
-          title="Equipments"
-          content={findHome.equipments}
-        />
-      </DescriptionContainer>
-    </div>
+    <ContentContainer>
+      <LocationContainer>
+        <h1>{findHome.title}</h1>
+        <h1>{findHome.description}</h1>
+
+        <h1>{findHome.equipments}</h1>
+
+        {/* <h1>{data.title}</h1>
+        <h2>{data.location}</h2>
+        <Tags tags={data.tags} /> */}
+      </LocationContainer>
+    </ContentContainer>
   );
 }
 
-export default Home;
+export default TestBack;

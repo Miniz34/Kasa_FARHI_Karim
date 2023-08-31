@@ -43,7 +43,7 @@ const TextAdvert = styled.h1`
 
 interface BannerProps {
   img: string;
-  text: string;
+  text?: string;
 }
 
 function Banner({ img, text }: BannerProps) {

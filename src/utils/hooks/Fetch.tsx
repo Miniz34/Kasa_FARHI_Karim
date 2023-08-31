@@ -16,9 +16,10 @@ export function useFetch(url) {
 
     async function fetchData() {
       try {
+        console.log("ur:", url);
         const response = await fetch(url);
         const dataHome = await response.json();
-        setData((current) => (current = dataHome));
+        setData(dataHome);
       } catch (err) {
         console.log(err);
         setError(true);
@@ -26,7 +27,9 @@ export function useFetch(url) {
         setLoading(false);
       }
     }
+
     fetchData();
   }, [url]);
+
   return { data, isLoading, error };
 }

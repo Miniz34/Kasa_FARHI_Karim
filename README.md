@@ -11,3 +11,6 @@
 ## 2. Start frontend
 
 `npm start`
+
+//TODO
+package.json :

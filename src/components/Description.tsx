@@ -58,6 +58,8 @@ const TextEquipments = styled.p`
 interface DescriptionProps {
   title: string;
   content: string;
+  equipments?: string[];
+  description?: string;
 }
 
 function Description({ title, content }: DescriptionProps) {

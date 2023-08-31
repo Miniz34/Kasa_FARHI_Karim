@@ -41,11 +41,17 @@ const ErrorRedirect = styled(Link)`
   color: ${colors.primary};
 `;
 
-function Error() {
+interface ErrorProps {
+  subtitle?: string;
+}
+
+function Error({ subtitle }: ErrorProps) {
   return (
     <ErrorContainer>
       <Error404>404</Error404>
-      <ErrorMsg>Oups ! La page que vous demandez n'existe pas.</ErrorMsg>
+      <ErrorMsg>
+        {subtitle ?? "Oups ! La page que vous demandez n'existe pas."}
+      </ErrorMsg>
       <ErrorRedirect to="/">Retourner sur la page d'accueil</ErrorRedirect>
     </ErrorContainer>
   );

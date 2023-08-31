@@ -18,9 +18,7 @@ function Loading() {
   }, []);
 
   if (error) {
-    return (
-      <Error subtitle="Oops, une erreur est survenue lors du chargement." />
-    );
+    return <Error />;
   }
 
   return (

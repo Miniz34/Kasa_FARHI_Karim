@@ -5,6 +5,10 @@ import Banner from "../components/Banner";
 import { useFetch } from "../utils/hooks/Fetch";
 import imgMainPage from "../assets/ImgMainPage.png";
 import Loading from "../components/Loading";
+import { Link } from "react-router-dom";
+import Header from "../layout/Header";
+import { HomiContext } from "../utils/context/Provider";
+import { useContext } from "react";
 
 const CardContainer = styled.div`
   display: flex;
@@ -38,15 +42,28 @@ function App() {
     window.location.origin + "/Kasa_FARHI_Karim/data.json"
   );
 
-  console.log(data);
+  const { darkTheme, userId, jwToken } = useContext(HomiContext);
+
+  console.log(darkTheme, userId, jwToken);
 
   if (isLoading) {
     return <Loading />;
   }
 
+  // const storage = localStorage.getItem("token");
+  // console.log(storage);
+
+  // const navigate = useNavigate();
+
+  // if (!storage) {
+  //   navigate("/login"); // Use history to navigate
+  //   return null; // Return null or a loading component if needed
+  // }
   return (
     <>
+      {/* <Header /> */}
       <Banner img={imgMainPage} text="Chez vous, partout et ailleurs" />
+      <Link to="/newHouse"> hey </Link>
       <CardContainer>
         {data.map((home, index) => (
           <Card
@@ -62,3 +79,5 @@ function App() {
 }
 
 export default App;
+
+// material-ui
