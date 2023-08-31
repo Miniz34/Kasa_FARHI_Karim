@@ -1,4 +1,5 @@
 import { ReactNode, useState, createContext } from "react";
+import { useCookies } from "react-cookie";
 
 /**
  * Props interface for the DisplayModal component.
@@ -90,6 +91,8 @@ interface ModalProviderProps {
   children?: ReactNode | null | undefined;
 }
 const HomiProvider = ({ children }: ModalProviderProps) => {
+  // const [cookies, setCookie] = useCookies(["darkTheme", "userId", "jwToken"]);
+
   const UpdateContext = (props: UpdateContextProps) => {
     setState((prevState) => ({
       ...prevState, // Preserve the previous state
@@ -104,6 +107,11 @@ const HomiProvider = ({ children }: ModalProviderProps) => {
       userId:
         typeof props.userId !== "undefined" ? props.userId : prevState.userId,
     }));
+
+    // Update the cookies with the new context values
+    // setCookie("darkTheme", props.darkTheme ? "true" : "false");
+    // setCookie("userId", props.userId || "");
+    // setCookie("jwToken", props.jwToken || "");
   };
   const [state, setState] = useState<HomiContextProps>({
     darkTheme: false,

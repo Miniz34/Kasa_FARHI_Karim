@@ -8,77 +8,42 @@ import styled, { keyframes } from "styled-components";
 import colors from "../utils/styles/colors";
 import { useContext } from "react";
 
-import { ModalContext } from "modal-kf-react/ModalProvider";
-
-// export const StyledLink = styled(Link)`
-//   padding: 10px 15px;
-//   color: ${colors.primary};
-//   text-decoration: none;
-//   font-size: 18px;
-//   text-align: center;
-//   @media only screen and (max-width: 762px) {
-//     font-size: 16px;
-//     padding: 0 0;
-//   }
-//   &:hover {
-//     text-decoration: underline;
-//   }
-// `;
-
-// const Button = styled.button`
-//   padding: 10px 15px;
-//   color: ${colors.primary};
-//   text-decoration: none;
-//   font-size: 18px;
-//   text-align: center;
-//   border: none;
-//   background-color: white;
-//   cursor: pointer;
-//   @media only screen and (max-width: 762px) {
-//     font-size: 16px;
-//     padding: 0 0;
-//   }
-//   &:hover {
-//     text-decoration: underline;
-//   }
-// `;
-
-// const MainLogo = styled.img`
-//   @media only screen and (max-width: 762px) {
-//     width: 150px;
-//   }
-// `;
-
-// const HeaderContainer = styled.div`
-//   display: flex;
-//   flex-direction: row;
-//   justify-content: space-between;
-//   margin-top: 2%;
-// `;
-
-// const NavContainer = styled.nav`
-// display: flex;
-// flex-direction: rows;
-// align-self: center;
-
-// gap: 30px;
-// text-decoration:
-// color: ${colors.primary};
-// @media only screen and (max-width: 762px) {
-//   gap: 20px;
-// }
-// }
-// `;
+import ModalProvider, { ModalContext } from "modal-kf-react/ModalProvider";
+import { useCookies } from "react-cookie";
+import { HomiContext } from "../utils/context/Provider";
 
 function Header() {
   const { open } = useContext(ModalContext);
+  const { DisplayModal } = useContext(ModalContext);
+
+  const { darkTheme, userId, jwToken } = useContext(HomiContext);
+
+  const [cookies, setCookie, removeCookie] = useCookies([
+    "darkTheme",
+    "userId",
+    "jwToken",
+  ]);
 
   const storage = localStorage.getItem("token");
+  const tokenCookie = cookies.jwToken;
+  const userIdCookie = cookies.userId;
+  console.log(tokenCookie);
+  console.log(userIdCookie);
 
   const logout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("id");
-    window.location.reload();
+    // localStorage.removeItem("token");
+    // localStorage.removeItem("id");
+    // window.location.reload();
+    removeCookie("darkTheme");
+    removeCookie("jwToken");
+    removeCookie("userId");
+
+    DisplayModal({
+      backgroundColor: "red",
+      children: "Déconnecté",
+      onClosed: () => window.location.reload(),
+    });
+
     return;
   };
 
@@ -94,6 +59,11 @@ function Header() {
         <img src={logo} alt="logo principal" className="header-logo" />
       </Link>
 
+      <div className="testing-cookies-and-shit">
+        {userId !== "" ? <span>CONTEXT ON</span> : <span>CONTEXT OFF</span>}
+        {userIdCookie ? <span>COOKIE ON</span> : <span>COOKIE OFF</span>}
+      </div>
+
       <nav className="nav-container">
         <Link to="/" className="header-link">
           Accueil
@@ -104,11 +74,15 @@ function Header() {
         <Link to="/CreateUser" className="header-link">
           test
         </Link>
-        {storage && (
+        {userIdCookie ? (
           <button className="header-button" onClick={logout}>
             Logout
           </button>
-        )}{" "}
+        ) : (
+          <Link to="/login" className="header-link">
+            Login
+          </Link>
+        )}
       </nav>
     </div>
   );

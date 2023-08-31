@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import App from "./App";
+import Home from "./Home";
 
 function AppWithNavigation() {
   const navigate = useNavigate();
@@ -13,7 +13,7 @@ function AppWithNavigation() {
     }
   }, [storage, navigate]);
 
-  return <App />;
+  return <Home />;
 }
 
 export default AppWithNavigation;

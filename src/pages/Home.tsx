@@ -1,140 +1,83 @@
-import { useParams } from "react-router-dom";
+import Card from "../components/Card";
 import styled from "styled-components";
-
-import { useFetch } from "../utils/hooks/Fetch";
-
-import Gallery from "../components/Gallery";
-import Description from "../components/Description";
-import "./Home";
 import colors from "../utils/styles/colors";
-import Rating from "../components/Rating";
-import Tags from "../components/Tags";
-import Error from "./Error";
+import Banner from "../components/Banner";
+import { useFetch } from "../utils/hooks/Fetch";
+import imgMainPage from "../assets/ImgMainPage.png";
 import Loading from "../components/Loading";
-import RatingProps from "../components/Rating";
+import { Link } from "react-router-dom";
+import Header from "../layout/Header";
+import { HomiContext } from "../utils/context/Provider";
+import { useContext } from "react";
 
-const ContentContainer = styled.div`
+const CardContainer = styled.div`
   display: flex;
-  flex-direction: rows;
-  margin-top: 20px;
-  color: ${colors.primary};
-  @media only screen and (max-width: 740px) {
-    flex-direction: column;
-    align-items: center;
-  }
-`;
-const LocationContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-  width: 100%;
-`;
-
-const RenterContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  @media only screen and (max-width: 740px) {
-    flex-direction: row-reverse;
-    width: 100%;
-    justify-content: space-around;
-
-`;
-
-const RenterData = styled.div`
-  display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
-  justify-content: flex-end;
-  width: 200px;
-  height: 64px;
-  @media only screen and (max-width: 740px) {
-    flex-direction: row;
-    width: 100%;
-    justify-content: flex-end;
-    margin-top: 30px;
-`;
-
-const RenterText = styled.span`
-  display: inline;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 18px;
-  line-height: 25px;
-  margin-top: 8px;
-  width: 90px;
-  margin-right: 10px;
-  text-align: end;
-  @media only screen and (max-width: 740px) {
-    font-size: 14px;
-    text-align: end;
-    min-width: 90px;
-
-`;
-
-const RenterImg = styled.img`
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  @media only screen and (max-width: 740px) {
-    width: 46px;
-    height: 46px;
+  margin: 43px auto 0 auto;
+  justify-content: start;
+  padding: 56px 50px;
+  gap: 60px 5%;
+  background-color: ${colors.background};
+  border-radius: 25px;
+  @media only screen and (max-width: 1250px) {
+    padding: 56px 28px;
+    justify-content: center;
+  }
+  @media only screen and (max-width: 762px) {
+    padding: 0px 0px;
+    background-color: #ffffff;
   }
 `;
-
-const DescriptionContainer = styled.div`
-  display: flex;
-  gap: 25px;
-  @media only screen and (max-width: 740px) {
-    flex-direction: column;
-    margin-top: 20px
-`;
-
+/**
+ * We use the useFetch hook to fetch data from the data.json file. *
+ * If the data is still loading, we display a loading component. *
+ * If the data is loaded, we display an advert component and a card container component.
+ * The card container component displays a card component for each home in the data.
+ * It's a function that returns a loading component if the data is still loading, otherwise it returns
+ * a card container with cards inside
+ * @returns a JSX element.
+ */
 function Home() {
-  const getId = useParams();
-  const homeId = getId.id;
-  console.log(getId);
-  const { data, isLoading } = useFetch("../data.json");
+  const { data, isLoading } = useFetch(
+    window.location.origin + "/Kasa_FARHI_Karim/data.json"
+  );
+
+  const { darkTheme, userId, jwToken } = useContext(HomiContext);
+
+  console.log(darkTheme, userId, jwToken);
 
   if (isLoading) {
     return <Loading />;
   }
-  const findHome = data.find((i) => i.id === homeId);
 
-  if (!findHome) {
-    return <Error />;
-  }
+  // const storage = localStorage.getItem("token");
+  // console.log(storage);
 
+  // const navigate = useNavigate();
+
+  // if (!storage) {
+  //   navigate("/login"); // Use history to navigate
+  //   return null; // Return null or a loading component if needed
+  // }
   return (
-    <div>
-      <Gallery img={findHome.pictures} id={homeId} />
-      <ContentContainer>
-        <LocationContainer>
-          <h1>{findHome.title}</h1>
-          <h2>{findHome.location}</h2>
-          <Tags tags={findHome.tags} />
-        </LocationContainer>
-        <RenterContainer>
-          <RenterData>
-            <RenterText>{findHome.host.name}</RenterText>
-            <RenterImg src={`${findHome.host.picture}`} alt="host" />
-          </RenterData>
-          <Rating rating={findHome.rating}></Rating>
-        </RenterContainer>
-      </ContentContainer>
-      <DescriptionContainer>
-        <Description
-          description={findHome.description}
-          title="Description"
-          content={findHome.description}
-        />
-        <Description
-          equipments={findHome.equipments}
-          title="Equipments"
-          content={findHome.equipments}
-        />
-      </DescriptionContainer>
-    </div>
+    <>
+      {/* <Header /> */}
+      <Banner img={imgMainPage} text="Chez vous, partout et ailleurs" />
+      <Link to="/newHouse"> hey </Link>
+      <CardContainer>
+        {data.map((home, index) => (
+          <Card
+            key={`${home.id}-${index}`}
+            id={home.id}
+            title={home.title}
+            picture={home.pictures[0]}
+          />
+        ))}
+      </CardContainer>
+    </>
   );
 }
 
 export default Home;
+
+// material-ui

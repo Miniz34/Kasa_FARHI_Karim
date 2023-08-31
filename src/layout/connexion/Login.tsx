@@ -11,6 +11,7 @@ import { EmailValidation } from "../../utils/validation/validation";
 
 // user API
 import API_USER from "../../utils/api/Users";
+import { useCookies } from "react-cookie";
 
 const Login: React.FC = () => {
   const { UpdateContext } = useContext(HomiContext);
@@ -18,6 +19,11 @@ const Login: React.FC = () => {
   // const { DisplayModal } = useContext(ModalContext);
   const open = false;
   const { darkTheme, userId, jwToken } = useContext(HomiContext);
+  const [cookies, setCookie, removeCookie] = useCookies([
+    "darkTheme",
+    "userId",
+    "jwToken",
+  ]);
   console.log(darkTheme, userId, jwToken);
 
   const navigate = useNavigate();
@@ -56,6 +62,9 @@ const Login: React.FC = () => {
             userId: response.id,
             jwToken: response.token,
           });
+          // setCookie("darkTheme", darkTheme);
+          // setCookie("userId", userId);
+          // setCookie("jwToken", jwToken);
           console.log(darkTheme, userId, jwToken);
           console.log("CONNECTE c:red");
 

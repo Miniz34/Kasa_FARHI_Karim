@@ -64,7 +64,7 @@ interface CardProps {
 
 function Card({ title, id, picture }: CardProps) {
   return (
-    <LinkCard to={`/home/${id}`}>
+    <LinkCard to={`/house/${id}`}>
       <ContainerCard className="ContainerCard">
         <ContainerImg
           src={picture}

@@ -2,8 +2,8 @@ import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./utils/styles/style.css";
 
-import App from "./pages/App.tsx";
-import Home from "./pages/Home";
+import Home from "./pages/Home.tsx";
+import House from "./pages/House";
 import Error from "./pages/Error";
 import About from "./pages/About";
 import styled from "styled-components";
@@ -22,6 +22,7 @@ import { useFetch } from "./utils/hooks/Fetch.tsx";
 import NewFooter from "./layout/NewFooter.tsx";
 
 import HomiProvider from "./utils/context/Provider.tsx";
+import { CookiesProvider } from "react-cookie";
 
 const Wrapper = styled.div`
   max-width: 1440px;
@@ -48,35 +49,31 @@ function Router() {
   ));
 
   return (
-    <React.StrictMode>
-      <BrowserRouter basename="/Kasa_FARHI_Karim">
-        <HomiProvider>
-          <Wrapper>
-            <Header />
-            <Routes>
-              {routeComponents}
-              <Route path="/login" element={<Login />} />
-              <Route path="/" element={<App />} />
-              <Route path="/home/:id" element={<Home />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/CreateUser" element={<CreateUser />} />
-              <Route path="/NewAccount" element={<NewAccount />} />
-              <Route path="/RetrievePw" element={<RetrievePw />} />
-              <Route path="/NewHouse" element={<NewHouse />} />
+    <BrowserRouter basename="/Kasa_FARHI_Karim">
+      <Wrapper>
+        <Header />
+        <Routes>
+          {routeComponents}
+          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/house/:id" element={<House />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/CreateUser" element={<CreateUser />} />
+          <Route path="/NewAccount" element={<NewAccount />} />
+          <Route path="/RetrievePw" element={<RetrievePw />} />
+          <Route path="/NewHouse" element={<NewHouse />} />
 
-              <Route path="*" element={<Error />} />
+          <Route path="*" element={<Error />} />
 
-              {/* <Route path="/ResetPw" element={<ResetPw />} /> */}
-              <Route path="/testBack" element={<TestBack />} />
-              {/* <Route path="/home/*" element={<Error />} /> */}
-            </Routes>
+          {/* <Route path="/ResetPw" element={<ResetPw />} /> */}
+          <Route path="/testBack" element={<TestBack />} />
+          {/* <Route path="/home/*" element={<Error />} /> */}
+        </Routes>
 
-            {/* <Footer /> */}
-            <NewFooter />
-          </Wrapper>
-        </HomiProvider>
-      </BrowserRouter>
-    </React.StrictMode>
+        {/* <Footer /> */}
+        <NewFooter />
+      </Wrapper>
+    </BrowserRouter>
   );
 }
 export default Router;
