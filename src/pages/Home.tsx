@@ -39,8 +39,14 @@ const CardContainer = styled.div`
  */
 function Home() {
   const { data, isLoading } = useFetch(
-    window.location.origin + "/Kasa_FARHI_Karim/data.json"
+    process.env.REACT_APP_API_URL_DEV + "/house/getall"
   );
+
+  console.log(data);
+
+  data.map((home) => {
+    console.log(home.houseId);
+  });
 
   const { darkTheme, userId, jwToken } = useContext(HomiContext);
 
@@ -65,12 +71,12 @@ function Home() {
       <Banner img={imgMainPage} text="Chez vous, partout et ailleurs" />
       <Link to="/newHouse"> hey </Link>
       <CardContainer>
-        {data.map((home, index) => (
+        {data.map((house, index) => (
           <Card
-            key={`${home.id}-${index}`}
-            id={home.id}
-            title={home.title}
-            picture={home.pictures[0]}
+            key={`${house.houseId}-${index}`}
+            id={house.houseId}
+            title={house.title}
+            picture={house.pictures[0]}
           />
         ))}
       </CardContainer>

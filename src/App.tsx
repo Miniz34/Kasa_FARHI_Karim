@@ -20,7 +20,9 @@ function App() {
       setCookie("darkTheme", darkTheme);
       setCookie("userId", userId);
       setCookie("jwToken", jwToken);
-      console.log("triggered");
+      localStorage.setItem("darkTheme", darkTheme.toString());
+      localStorage.setItem("userId", userId);
+      localStorage.setItem("jwToken", jwToken);
     }
   }, [darkTheme, userId, jwToken]);
 

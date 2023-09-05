@@ -87,10 +87,10 @@ const initialState: HomiContextProps = {
 };
 export const HomiContext = createContext<HomiContextProps>(initialState);
 
-interface ModalProviderProps {
+interface HomiProviderProps {
   children?: ReactNode | null | undefined;
 }
-const HomiProvider = ({ children }: ModalProviderProps) => {
+const HomiProvider = ({ children }: HomiProviderProps) => {
   // const [cookies, setCookie] = useCookies(["darkTheme", "userId", "jwToken"]);
 
   const UpdateContext = (props: UpdateContextProps) => {

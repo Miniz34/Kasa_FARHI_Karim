@@ -4,9 +4,12 @@
 // export const streetValidation = /[a-zA-Z]{2}/;
 // export const zipCodeValidation = /^\d{5}$/;
 
-export const LastNameValidation = /[a-zA-Z].*[a-zA-Z]/;
-export const FirstNameValidation = /[a-zA-Z].*[a-zA-Z]/;
-export const NickNameValidation = /[a-zA-Z].*[a-zA-Z]/;
-export const EmailValidation = /[a-zA-Z].*[a-zA-Z]/;
-export const PasswordValidation = /[a-zA-Z].*[a-zA-Z]/;
-export const PasswordCreationValidation = /[a-zA-Z].*[a-zA-Z]/;
+export const Validations = {
+  LastNameValidation: /[a-zA-Z].*[a-zA-Z]/,
+  FirstNameValidation: /[a-zA-Z].*[a-zA-Z]/,
+  NickNameValidation: /[a-zA-Z].*[a-zA-Z]/,
+  EmailValidation:
+    /^[a-zA-Z0-9À-ÖØ-öø-ÿ!#$%&'*+/=?^_`{|}~.-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+  PasswordValidation: /^.{3,}$/,
+  PasswordCreationValidation: /[a-zA-Z].*[a-zA-Z]/,
+};

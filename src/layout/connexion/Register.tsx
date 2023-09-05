@@ -1,13 +1,13 @@
-import React, { createRef, useContext } from "react";
+import React, { createRef, useContext, useEffect, useState } from "react";
 import { useNavigate, NavLink } from "react-router-dom";
 import { HomiContext } from "../../utils/context/Provider";
 
 // modal
 // import colors from "../../utils/styles/colors";
-// import { DisplayModalProps, ModalContext } from "modal-kf-react/ModalProvider";
+import { ModalContext } from "modal-kf-react/ModalProvider";
 
 // validation
-import { EmailValidation } from "../../utils/validation/validation";
+import { Validations } from "../../utils/validation/validation";
 
 // user API
 import API_USER from "../../utils/api/Users";
@@ -15,34 +15,56 @@ import { useCookies } from "react-cookie";
 
 const Register: React.FC = () => {
   const { UpdateContext } = useContext(HomiContext);
-  // const { open } = useContext(ModalContext);
-  // const { DisplayModal } = useContext(ModalContext);
-  const open = false;
+  const { open } = useContext(ModalContext);
+  const { DisplayModal } = useContext(ModalContext);
   const { darkTheme, userId, jwToken } = useContext(HomiContext);
   const [cookies, setCookie, removeCookie] = useCookies([
     "darkTheme",
     "userId",
     "jwToken",
   ]);
-  console.log(darkTheme, userId, jwToken);
+  const [emailValid, setEmailValid] = useState(true);
+  const [firstNameValid, setFirstNameValid] = useState(true);
+  const [lastNameValid, setLastNameValid] = useState(true);
+  const [passwordValid, setPasswordValid] = useState(true);
+  const [formValid, setFormValid] = useState(false);
 
   const navigate = useNavigate();
   const refEmail = createRef<HTMLInputElement>();
   const refPassword = createRef<HTMLInputElement>();
   const refFirstname = createRef<HTMLInputElement>();
-
   const refLastName = createRef<HTMLInputElement>();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    EmailValidation.test(refEmail.current.value);
-    // if fail -> show error message
+    const { name, value } = e.target;
+
+    if (name === "email") {
+      setEmailValid(Validations.EmailValidation.test(value));
+      console.log("STATUS DU FORM : ", formValid);
+    }
+    if (name === "firstName") {
+      setFirstNameValid(Validations.FirstNameValidation.test(value));
+    }
+    if (name === "lastName") {
+      setLastNameValid(Validations.LastNameValidation.test(value));
+    }
+    if (name === "password") {
+      setPasswordValid(Validations.PasswordValidation.test(value));
+    }
   };
 
-  const validateForm = (email: string) => {
-    const isEmailValid = EmailValidation.test(email);
-    console.log(email);
-    return isEmailValid;
-  };
+  useEffect(() => {
+    if (
+      refFirstname.current.value &&
+      refLastName.current.value &&
+      refEmail.current.value &&
+      refPassword.current.value
+    ) {
+      const isFormValid =
+        emailValid && firstNameValid && lastNameValid && passwordValid;
+      setFormValid(isFormValid);
+    }
+  }, [emailValid, firstNameValid, lastNameValid, passwordValid]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -53,41 +75,57 @@ const Register: React.FC = () => {
       const lastName = refLastName.current.value;
       const email = refEmail.current.value;
       const password = refPassword.current.value;
-      const isFormValid = validateForm(email);
-      if (isFormValid) {
-        const response = await API_USER.register({
-          firstName,
-          lastName,
-          email,
-          password,
+      // if (isFormValid) {
+      const response = await API_USER.register({
+        firstName,
+        lastName,
+        email,
+        password,
+      });
+      if (response.success) {
+        console.log(response);
+        console.log(response.id);
+        console.log(response.succes);
+        UpdateContext({
+          darkTheme: true,
+          userId: response.id,
+          jwToken: response.token,
         });
-        if (response.success) {
-          console.log(response);
-          console.log(response.id);
-          console.log(response.succes);
-          console.log(
-            "LA ICI YOUHOU ON EST DANS RESPONSE SUCCES FAUT UPDATE LE CONTEXTE EN DESSOUS"
-          );
-          UpdateContext({
-            darkTheme: true,
-            userId: response.id,
-            jwToken: response.token,
-          });
-          // setCookie("darkTheme", darkTheme);
-          // setCookie("userId", userId);
-          // setCookie("jwToken", jwToken);
-          console.log(darkTheme, userId, jwToken);
-          console.log("CONNECTE c:red");
+        // setCookie("darkTheme", darkTheme);
+        // setCookie("userId", userId);
+        // setCookie("jwToken", jwToken);
+        console.log(darkTheme, userId, jwToken);
+        DisplayModal({
+          mode: "info",
+          title: "Account created ! ",
+          children: "You are now logged in",
+          borderRadius: "0px",
+          enableFadeIn: false,
+          enableFadeOut: false,
+          onClosed: () => {
+            navigate("/");
+          },
+        });
 
-          navigate("/");
-          // window.location.reload();
-          return;
-        } else {
-          console.log("not connected for some reason ...", response);
-        }
+        return;
+      } else if (response.status === 409) {
+        console.log("not connected for some reason ...", response);
+        DisplayModal({
+          mode: "error",
+          title: "Error",
+          children: "Email already exists",
+          borderRadius: "0px",
+          enableFadeIn: false,
+          enableFadeOut: false,
+        });
       } else {
-        console.log("invalid email"); // --> DisplayModal (error)
+        console.log("random error");
       }
+      // } else {
+      //   console.log(isFormValid);
+
+      //   console.log("invalid email"); // --> DisplayModal (error)
+      // }
     } catch (error) {
       console.error("An error occurred:", error);
     }
@@ -97,10 +135,10 @@ const Register: React.FC = () => {
     <form
       className={open ? "login-form-hide" + " " + "login-form" : "login-form"}
     >
-      <h2 className="login-title">Connexion</h2>
+      <h2 className="login-title">Register</h2>
 
       <label htmlFor="firstName" className="login-label">
-        firstName
+        First Name
       </label>
       <input
         ref={refFirstname}
@@ -109,11 +147,19 @@ const Register: React.FC = () => {
         name="firstName"
         defaultValue=""
         onChange={handleChange}
-        className="login-input"
+        // className="login-input"
+        className={
+          !firstNameValid
+            ? "login-input-error" + " " + "login-input"
+            : "login-input"
+        }
         autoComplete="plopo@gmail.com"
       />
+
+      {!firstNameValid && <p className="error-message">Invalid First Name</p>}
+
       <label htmlFor="lastName" className="login-label">
-        lastName
+        Last Name
       </label>
       <input
         ref={refLastName}
@@ -122,9 +168,15 @@ const Register: React.FC = () => {
         name="lastName"
         defaultValue=""
         onChange={handleChange}
-        className="login-input"
+        className={
+          !lastNameValid
+            ? "login-input-error" + " " + "login-input"
+            : "login-input"
+        }
         autoComplete="plopo@gmail.com"
       />
+
+      {!lastNameValid && <p className="error-message">Invalid Last Name</p>}
 
       <label htmlFor="email" className="login-label">
         Email
@@ -136,12 +188,18 @@ const Register: React.FC = () => {
         name="email"
         defaultValue=""
         onChange={handleChange}
-        className="login-input"
+        className={
+          !emailValid
+            ? "login-input-error" + " " + "login-input"
+            : "login-input"
+        }
         autoComplete="plopo@gmail.com"
       />
 
+      {!emailValid && <p className="error-message">Invalid Email Adress</p>}
+
       <label htmlFor="password" className="login-label">
-        Password
+        password
       </label>
       <input
         ref={refPassword}
@@ -149,17 +207,31 @@ const Register: React.FC = () => {
         id="password"
         name="password"
         defaultValue=""
-        className="login-input"
-        autoComplete="plopo"
+        onChange={handleChange}
+        className={
+          !passwordValid
+            ? "login-input-error" + " " + "login-input"
+            : "login-input"
+        }
+        autoComplete="plopo@gmail.com"
       />
 
-      {/* Retrieve password */}
+      {!passwordValid && <p className="error-message">Invalid Password</p>}
+
       <div className="login-redirect">
-        <NavLink to={"/RetrievePw"}>Mot de passe oublié</NavLink>
-        <NavLink to={"/NewAccount"}>Créer un compte</NavLink>
+        <NavLink to={"/auth/login"}>Already an account ?</NavLink>
       </div>
 
-      <button type="submit" onClick={handleSubmit} className="login-submit">
+      <button
+        type="submit"
+        onClick={handleSubmit}
+        className={
+          !formValid
+            ? "login-submit" + " " + "login-submit-disable"
+            : "login-submit"
+        }
+        disabled={!formValid ? true : false}
+      >
         Submit
       </button>
     </form>

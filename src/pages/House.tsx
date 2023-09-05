@@ -11,6 +11,9 @@ import Tags from "../components/Tags";
 import Error from "./Error";
 import Loading from "../components/Loading";
 import RatingProps from "../components/Rating";
+import { useEffect, useState } from "react";
+import USER_API from "../utils/api/Users";
+import HOUSE_API from "../utils/api/House";
 
 const ContentContainer = styled.div`
   display: flex;
@@ -92,46 +95,118 @@ function House() {
   const getId = useParams();
   const homeId = getId.id;
   console.log(getId);
-  const { data, isLoading } = useFetch("../data.json");
+  // const { data, isLoading } = useFetch(
+  //   process.env.REACT_APP_API_URL_DEV + "/house/getall"
+  // );
 
-  if (isLoading) {
-    return <Loading />;
-  }
-  const findHome = data.find((i) => i.id === homeId);
+  const [user, setUser] = useState({
+    firstName: "",
+    lastName: "",
+    userId: "",
+    avatar:
+      "https://pro.destination-vendeegrandlittoral.com/wp-content/uploads/sites/2/2019/09/avatar.jpg",
+    email: "",
+  });
 
-  if (!findHome) {
-    return <Error />;
-  }
+  // const findHouse = data.find((i) => i.houseId === parseInt(homeId));
+
+  useEffect(() => {
+    const getHouse = async () => {
+      try {
+        const response = await HOUSE_API.findOne({ id: homeId });
+        if (response.success) {
+          console.log(response);
+        } else {
+          console.log("help ", response);
+        }
+      } catch (error) {
+        console.error("An error occurred:", error);
+      }
+    };
+    getHouse();
+  }, [homeId]);
+
+  // useEffect(() => {
+  //   const findHouse = data.find((i) => i.houseId === parseInt(homeId));
+  //   if (findHouse && user.userId !== findHouse.userId) {
+  //     USER_API.getOneUser({
+  //       userId: findHouse.userId,
+  //     })
+  //       .then((response) => {
+  //         console.log("respônse here : ", response);
+  //         console.log("data here", data);
+  //         if (response.success) {
+  //           setUser({
+  //             firstName: response.user.firstName,
+  //             lastName: response.user.lastName,
+  //             userId: response.user.userId,
+  //             avatar: response.user.avatar,
+  //             email: response.user.email,
+  //           });
+  //         } else {
+  //           console.log("not connected for some reason ...", response);
+  //         }
+  //       })
+  //       .catch((error) => {
+  //         console.log(error);
+  //       });
+  //   }
+  // }, [data, homeId, user]);
+
+  // USER_API.getOneUser({
+  //   userId: findHouse.userId,
+  // }).then((response) => {
+  //   if (response.success) {
+  //     console.log(response);
+  //     setUser({
+  //       firstName: response.user.firstName,
+  //       lastName: response.user.lastName,
+  //       userId: response.user.userId,
+  //       avatar: response.user.avatar,
+  //       email: response.user.email,
+  //     });
+  //   } else {
+  //     console.log("not connected for some reason ...", response);
+  //   }
+  // });
+
+  // if (isLoading) {
+  //   return <Loading />;
+  // }
+
+  // if (!findHouse) {
+  //   return <Error />;
+  // }
 
   return (
     <div>
-      <Gallery img={findHome.pictures} id={homeId} />
+      {/* <Gallery img={findHouse.pictures} id={homeId} />
       <ContentContainer>
         <LocationContainer>
-          <h1>{findHome.title}</h1>
-          <h2>{findHome.location}</h2>
-          <Tags tags={findHome.tags} />
+          <h1>{findHouse.title}</h1>
+          <h2>{findHouse.location}</h2>
+          <Tags tags={findHouse.tags} />
         </LocationContainer>
         <RenterContainer>
           <RenterData>
-            <RenterText>{findHome.host.name}</RenterText>
-            <RenterImg src={`${findHome.host.picture}`} alt="host" />
+            <RenterText>{findHouse.host.name}</RenterText>
+            <RenterImg src={`${findHouse.host.picture}`} alt="host" />
           </RenterData>
-          <Rating rating={findHome.rating}></Rating>
+          <Rating rating={findHouse.rating}></Rating>
         </RenterContainer>
       </ContentContainer>
       <DescriptionContainer>
         <Description
-          description={findHome.description}
+          description={findHouse.description}
           title="Description"
-          content={findHome.description}
+          content={findHouse.description}
         />
         <Description
-          equipments={findHome.equipments}
+          equipments={findHouse.equipments}
           title="Equipments"
-          content={findHome.equipments}
+          content={findHouse.equipments}
         />
-      </DescriptionContainer>
+      </DescriptionContainer> */}
     </div>
   );
 }

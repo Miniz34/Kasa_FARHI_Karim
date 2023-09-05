@@ -55,10 +55,6 @@ function Gallery({ img, id }: GalleryProps) {
   const [pictureCounter, setPictureCounter] = useState(0);
   const [animate, setAnimate] = useState(true);
 
-  console.log(typeof img);
-  console.log(typeof id);
-
-  console.log(pictureCounter);
   /* Resetting the pictureCounter to 0 when the homeId changes. */
   useEffect(() => {
     setPictureCounter(0);

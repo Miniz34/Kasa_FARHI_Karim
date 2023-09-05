@@ -27,9 +27,8 @@ function Header() {
   const storage = localStorage.getItem("token");
   const tokenCookie = cookies.jwToken;
   const userIdCookie = cookies.userId;
-  console.log(tokenCookie);
-  console.log(userIdCookie);
 
+  //TODO : ne fonctionne pas soit sur la page profil, soit sur l'userId1
   const logout = () => {
     // localStorage.removeItem("token");
     // localStorage.removeItem("id");
@@ -41,7 +40,7 @@ function Header() {
     DisplayModal({
       backgroundColor: "red",
       children: "Déconnecté",
-      onClosed: () => window.location.reload(),
+      // onClosed: () => window.location.reload(),
     });
 
     return;
@@ -75,11 +74,16 @@ function Header() {
           test
         </Link>
         {userIdCookie ? (
-          <button className="header-button" onClick={logout}>
-            Logout
-          </button>
+          <>
+            <Link to={`/profil/${userIdCookie}`} className="header-link">
+              Profil
+            </Link>
+            <button className="header-button" onClick={logout}>
+              Logout
+            </button>
+          </>
         ) : (
-          <Link to="/login" className="header-link">
+          <Link to="/auth/login" className="header-link">
             Login
           </Link>
         )}

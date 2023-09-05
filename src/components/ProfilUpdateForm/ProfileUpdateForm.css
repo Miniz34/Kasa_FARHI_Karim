@@ -1,0 +1,11 @@
+.profile-update-form {
+  display: flex;
+  flex-direction: column;
+  background-color: #ff6060;
+  justify-content: center;
+  text-align: center;
+  gap: 25px;
+  padding: 20px;
+  height: 100%;
+  width: 100%;
+}

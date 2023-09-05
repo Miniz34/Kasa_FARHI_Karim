@@ -70,7 +70,10 @@ function Card({ title, id, picture }: CardProps) {
           src={picture}
           alt="minituature de l'appartement"
         ></ContainerImg>
-        <TitleCard>{title}</TitleCard>
+        <TitleCard>
+          {title} <br />
+          {id}
+        </TitleCard>
       </ContainerCard>
     </LinkCard>
   );

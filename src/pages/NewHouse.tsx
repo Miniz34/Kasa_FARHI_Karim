@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useCookies } from "react-cookie";
 
 interface FormDataDeux {
   title: string;
@@ -10,7 +11,9 @@ interface FormDataDeux {
 }
 
 const NewHouse: React.FC = () => {
-  const id = localStorage.getItem("id");
+  const [cookies] = useCookies(["userId"]);
+
+  const id = cookies.userId;
   console.log(id);
 
   const [formDataDeux, setFormDataDeux] = useState<FormDataDeux>({

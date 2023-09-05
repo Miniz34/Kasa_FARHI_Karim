@@ -3,6 +3,7 @@
   flex-direction: column;
   width: 300px;
   margin: auto;
+  margin-top: 250px;
   gap: 5px;
   /*TODO */
   /* height: 600px; */
@@ -11,6 +12,7 @@
 .login-form-hide {
   pointer-events: none;
   opacity: 0.5;
+  /* filter: brightness(20%); */
 }
 
 .login-title {
@@ -25,9 +27,18 @@
 }
 
 .login-input {
+  outline: none;
   margin: auto;
   width: 250px;
 }
+
+.login-input-error {
+  border: solid red 2px;
+}
+/* 
+.login-input-error:focus {
+  border: solid red 2px;
+} */
 
 .login-redirect {
   font-size: 12px;
@@ -48,4 +59,16 @@
   cursor: pointer;
   height: 25px;
   border: solid 1px black;
+}
+
+.login-submit-disable {
+  pointer-events: none;
+
+  opacity: 0.4;
+}
+
+.error-message {
+  width: 250px;
+  margin: auto;
+  color: red;
 }
