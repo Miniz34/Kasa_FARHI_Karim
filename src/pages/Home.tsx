@@ -39,7 +39,7 @@ const CardContainer = styled.div`
  */
 function Home() {
   const { data, isLoading } = useFetch(
-    process.env.REACT_APP_API_URL_DEV + "/house/getall"
+    process.env.REACT_APP_API_URL_DEV + "/house/all/"
   );
 
   console.log(data);

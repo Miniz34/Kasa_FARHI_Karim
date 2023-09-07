@@ -10,7 +10,7 @@ import Header from "./layout/Header";
 import Footer from "./layout/Footer";
 import CreateUser from "./pages/CreateUser.tsx";
 
-import NewHouse from "./pages/NewHouse.tsx";
+import NewHouse from "./pages/CreateHouse/CreateHouse.tsx";
 
 import { useFetch } from "./utils/hooks/Fetch.tsx";
 import NewFooter from "./layout/NewFooter.tsx";
@@ -20,7 +20,8 @@ import Profil from "./pages/Profil.tsx";
 
 import HomiProvider from "./utils/context/Provider.tsx";
 import { CookiesProvider } from "react-cookie";
-import House from "./pages/House.tsx";
+import House from "./pages/House/House.tsx";
+
 const Wrapper = styled.div`
   max-width: 1440px;
   margin: 0 100px;
@@ -36,7 +37,7 @@ const Wrapper = styled.div`
 
 function Router() {
   const { data, isLoading } = useFetch(
-    process.env.REACT_APP_API_URL_DEV + "/users"
+    process.env.REACT_APP_API_URL_DEV + "/user/all/"
   );
 
   const tokenPw = data.map((e) => e.resetPw).filter((value) => value !== "");

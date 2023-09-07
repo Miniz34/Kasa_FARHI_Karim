@@ -100,7 +100,7 @@ function ProfilUpdateAvatar({ userId }: ProfileUpdateAvatarProps) {
       setErrorAvatar(true);
     }
 
-    const response = await USER_API.testMulter({
+    const response = await USER_API.updateAvatar({
       userId: id,
       formData,
       jwToken: jwTokenCookie,

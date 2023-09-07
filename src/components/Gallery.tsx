@@ -47,7 +47,7 @@ const MainImg = styled.img<{ animate?: boolean }>`
 `;
 
 interface GalleryProps {
-  img: [string];
+  img: string[];
   id: string;
 }
 

@@ -12,7 +12,7 @@ function RetrievePassword() {
   };
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
+    console.log("handle submit");
     const testEmail = Validations.EmailValidation.test(refEmail.current.value);
     const email = refEmail.current.value;
     let emailToSend = "";
@@ -50,29 +50,6 @@ function RetrievePassword() {
       console.log(error);
       console.log("indiquez un email valide");
     }
-
-    // const validateForm = (
-    //   email: string,
-    //   firstName: string,
-    //   lastName: string,
-    //   password: string
-    // ) => {
-    //   const isEmailValid = Validations.EmailValidation.test(email);
-    //   const isFirstNameValid = Validations.FirstNameValidation.test(firstName);
-    //   const isLastNameValid = Validations.LastNameValidation.test(lastName);
-    //   const isPasswordValid = Validations.PasswordValidation.test(password);
-
-    //   if (
-    //     isEmailValid &&
-    //     isFirstNameValid &&
-    //     isLastNameValid &&
-    //     isPasswordValid
-    //   ) {
-    //     return true;
-    //   } else {
-    //     return false;
-    //   }
-    // };
 
     return null;
   };

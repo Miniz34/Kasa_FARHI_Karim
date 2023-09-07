@@ -57,7 +57,7 @@ const TextEquipments = styled.p`
 
 interface DescriptionProps {
   title: string;
-  content: string;
+  content?: string | string[];
   equipments?: string[];
   description?: string;
 }

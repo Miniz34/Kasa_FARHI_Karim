@@ -4,8 +4,7 @@ import { useCookies } from "react-cookie";
 
 const Login = async ({ email, password }) => {
   // const {contextLogin} = useContext(Context)
-
-  return await fetch(process.env.REACT_APP_API_URL_DEV + "/users/login", {
+  return await fetch(process.env.REACT_APP_API_URL_DEV + "/user/login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -40,7 +39,7 @@ const Login = async ({ email, password }) => {
 };
 
 async function Register({ firstName, lastName, email, password }) {
-  return await fetch(process.env.REACT_APP_API_URL_DEV + "/users/new", {
+  return await fetch(process.env.REACT_APP_API_URL_DEV + "/user/new", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -73,7 +72,7 @@ async function Register({ firstName, lastName, email, password }) {
 }
 
 async function GetOneUser({ userId }: { userId: number }) {
-  return await fetch(process.env.REACT_APP_API_URL_DEV + `/users/${userId}`, {
+  return await fetch(process.env.REACT_APP_API_URL_DEV + `/user/${userId}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -98,55 +97,20 @@ async function GetOneUser({ userId }: { userId: number }) {
     .catch((error) => ({ ...error, success: false }));
 }
 
-async function ModifyAvatar({ userId, avatar, jwToken }) {
-  // const {contextLogin} = useContext(Context)
-
-  return await fetch(
-    process.env.REACT_APP_API_URL_DEV + `/users/${userId}/modifyavatar`,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        //TODO : absurde, j'ajoute 2x le token manuellement
-        Authorization: `Bearer ${jwToken}`,
-      },
-      body: JSON.stringify({ avatar, jwToken }),
-    }
-  )
-    .then(async (response) => {
-      if (response.ok) {
-        if (response.status === 200)
-          // good response
-          return response.json();
-      }
-      const err = await response.json();
-      throw { code: err.code, error: err.message, status: response.status };
-    })
-    .then((user) => {
-      return {
-        code: 200,
-        success: true,
-        avatar: avatar,
-        NewUser: user,
-      };
-    })
-    .catch((error) => ({ ...error, success: false }));
-}
-
-async function TestMulter({ userId, formData, jwToken }) {
+async function UpdateAvatar({ userId, formData, jwToken }) {
   const requestHeaders = {
     Authorization: `Bearer ${jwToken}`,
   };
 
-  let apiUrl = process.env.REACT_APP_API_URL_DEV + `/users/${userId}/avatar`;
+  let apiUrl = process.env.REACT_APP_API_URL_DEV + `/user/${userId}/avatar`;
 
   if (formData.get("avatarUrl")) {
     // If formData contains an avatar URL, send a different API request
-    apiUrl = process.env.REACT_APP_API_URL_DEV + `/users/${userId}/avatar`;
+    apiUrl = process.env.REACT_APP_API_URL_DEV + `/user/${userId}/avatar`;
   }
 
   return await fetch(apiUrl, {
-    method: "POST",
+    method: "PUT",
     headers: requestHeaders,
     body: formData,
   })
@@ -174,7 +138,7 @@ async function UpdateUser({ userId, jwToken, firstName, lastName, email }) {
   console.log(firstName, lastName, email);
 
   const response = await fetch(
-    process.env.REACT_APP_API_URL_DEV + `/users/${userId}/updateuser`,
+    process.env.REACT_APP_API_URL_DEV + `/user/${userId}/updateuser`,
     {
       method: "PUT",
       headers: {
@@ -209,6 +173,7 @@ async function UpdateUser({ userId, jwToken, firstName, lastName, email }) {
   // .catch((error) => ({ ...error, success: false }));
 }
 
+//Fonctionne pas à cause de cookies
 async function Logout() {
   const [cookies, setCookie, removeCookie] = useCookies([
     "darkTheme",
@@ -237,6 +202,7 @@ async function Logout() {
   }
 }
 
+//TODO
 async function Unsubscribe() {
   return { code: 203 };
 }
@@ -244,8 +210,8 @@ async function Unsubscribe() {
 async function RetrievePassword({ email }) {
   console.log("test email in api:", email);
 
-  const response = await fetch(
-    process.env.REACT_APP_API_URL_DEV + `/users/retrievepw`,
+  return await fetch(
+    process.env.REACT_APP_API_URL_DEV + `/user/retrievepassword`,
     {
       method: "POST",
       headers: {
@@ -254,38 +220,41 @@ async function RetrievePassword({ email }) {
       },
       body: JSON.stringify({ email }),
     }
-  );
+  )
+    .then(async (response) => {
+      if (response.ok && (response.status === 200 || response.status === 201))
+        return response.json();
+      throw { response: response, code: response.status };
+    })
 
-  if (response.ok) {
-    if (response.status === 200 || response.status === 201) {
-      const res = await response.json();
+    .then((res) => ({
+      code: 200,
+      success: true,
+      email,
+      res,
+    }))
+
+    .catch(async (err) => {
+      if (!err.response) {
+        return { code: 500, success: false, message: "cassé", email };
+      }
+      const result = await err.response.json();
+      console.log(err.code);
       return {
-        code: 200,
-        success: true,
-        email,
-        res,
-      };
-    } else if (response.status === 400) {
-      //TODO : pourquoi j'arrive pas à récup ces données ? (retrievePassword.tsx ligne 42)
-      const message = await response.json();
-      return {
-        code: 400,
+        code: err.code,
         success: false,
-        message,
+        email,
+        message: result.message,
       };
-    }
-  } else {
-    const err = await response.json();
-    throw { code: err.code, error: err.message, status: response.status };
-  }
+    });
 }
 
 async function ResetPassword({ password, repeatPassword, token }) {
   console.log("called");
   return await fetch(
-    process.env.REACT_APP_API_URL_DEV + `/users/resetpassword`,
+    process.env.REACT_APP_API_URL_DEV + `/user/resetpassword`,
     {
-      method: "POST",
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
         //TODO : absurde, j'ajoute 2x le token manuellement
@@ -325,8 +294,7 @@ const USER_API = {
   unsubscribe: Unsubscribe,
   retrievePassword: RetrievePassword,
   getOneUser: GetOneUser,
-  modifyAvatar: ModifyAvatar,
-  testMulter: TestMulter,
+  updateAvatar: UpdateAvatar,
   updateUser: UpdateUser,
   resetPassword: ResetPassword,
 };

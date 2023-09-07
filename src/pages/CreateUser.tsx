@@ -42,7 +42,7 @@ const CreateUser: React.FC = () => {
     e.preventDefault();
     try {
       const response = await fetch(
-        process.env.REACT_APP_API_URL_DEV + "/users/new",
+        process.env.REACT_APP_API_URL_DEV + "/user/new",
         {
           method: "POST",
           headers: {
@@ -92,7 +92,9 @@ const CreateUser: React.FC = () => {
 
   const fetchData = async () => {
     try {
-      const response = await fetch(process.env.REACT_APP_API_URL + "/users");
+      const response = await fetch(
+        process.env.REACT_APP_API_URL + "/user/all/"
+      );
       const data = await response.json();
 
       console.log("Response from API:", data); // Logging the response data
