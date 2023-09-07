@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { useFetch } from "../hooks/Fetch";
-import { useCookies } from "react-cookie";
 
 const Login = async ({ email, password }) => {
   // const {contextLogin} = useContext(Context)
@@ -173,26 +172,12 @@ async function UpdateUser({ userId, jwToken, firstName, lastName, email }) {
   // .catch((error) => ({ ...error, success: false }));
 }
 
-//Fonctionne pas à cause de cookies
 async function Logout() {
-  const [cookies, setCookie, removeCookie] = useCookies([
-    "darkTheme",
-    "userId",
-    "jwToken",
-  ]);
-
-  const darkThemeCookie = cookies.darkTheme;
-  const userIdCookie = cookies.userId;
-  const jwTokenCookie = cookies.jwToken;
-
   try {
-    removeCookie("darkTheme");
-    removeCookie("jwToken");
-    removeCookie("userId");
+    console.log("COME HERE TO DELETE THIS SHIT AT SOME POINT");
 
     return { code: 200, success: true };
   } catch (error) {
-    // Handle any errors that occur during cookie removal
     console.error("Error while removing cookies:", error);
     return {
       code: 500,

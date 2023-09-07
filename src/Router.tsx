@@ -8,7 +8,6 @@ import About from "./pages/About";
 import styled from "styled-components";
 import Header from "./layout/Header";
 import Footer from "./layout/Footer";
-import CreateUser from "./pages/CreateUser.tsx";
 
 import NewHouse from "./pages/CreateHouse/CreateHouse.tsx";
 
@@ -19,7 +18,6 @@ import AuthPage from "./pages/AuthPage.tsx";
 import Profil from "./pages/Profil.tsx";
 
 import HomiProvider from "./utils/context/Provider.tsx";
-import { CookiesProvider } from "react-cookie";
 import House from "./pages/House/House.tsx";
 
 const Wrapper = styled.div`
@@ -57,8 +55,6 @@ function Router() {
 
           <Route path="/house/:id" element={<House />} />
           <Route path="/about" element={<About />} />
-          <Route path="/CreateUser" element={<CreateUser />} />
-          {/* <Route path="/RetrievePw" element={<RetrievePw />} /> */}
           <Route path="/NewHouse" element={<NewHouse />} />
           <Route path="/profil/:id" element={<Profil />} />
 
@@ -66,7 +62,6 @@ function Router() {
 
           <Route path="*" element={<Error />} />
 
-          {/* <Route path="/ResetPw" element={<ResetPw />} /> */}
           {/* <Route path="/home/*" element={<Error />} /> */}
         </Routes>
 

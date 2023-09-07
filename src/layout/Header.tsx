@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import { Link } from "react-router-dom";
-import "./Header.css";
+import "./Header.scss";
 
 import logo from "../assets/LOGO.svg";
 import styled, { keyframes } from "styled-components";
@@ -9,7 +9,6 @@ import colors from "../utils/styles/colors";
 import { useContext } from "react";
 
 import ModalProvider, { ModalContext } from "modal-kf-react/ModalProvider";
-import { useCookies } from "react-cookie";
 import { HomiContext } from "../utils/context/Provider";
 
 function Header() {
@@ -18,24 +17,18 @@ function Header() {
 
   const { darkTheme, userId, jwToken } = useContext(HomiContext);
 
-  const [cookies, setCookie, removeCookie] = useCookies([
-    "darkTheme",
-    "userId",
-    "jwToken",
-  ]);
-
-  const storage = localStorage.getItem("token");
-  const tokenCookie = cookies.jwToken;
-  const userIdCookie = cookies.userId;
+  const storedUserId = localStorage.getItem("userId");
+  const storedJwToken = localStorage.getItem("jwToken");
 
   //TODO : ne fonctionne pas soit sur la page profil, soit sur l'userId1
   const logout = () => {
     // localStorage.removeItem("token");
     // localStorage.removeItem("id");
     // window.location.reload();
-    removeCookie("darkTheme");
-    removeCookie("jwToken");
-    removeCookie("userId");
+    localStorage.removeItem("userId");
+    localStorage.removeItem("jwToken");
+
+    localStorage.removeItem("darkTheme");
 
     DisplayModal({
       backgroundColor: "red",
@@ -54,13 +47,17 @@ function Header() {
           : "header-container"
       }
     >
-      <Link to="/">
+      {/* <Link to="/">
         <img src={logo} alt="logo principal" className="header-logo" />
+      </Link> */}
+
+      <Link to="/" className="header-title">
+        <h1 className="header-title-content">HOMI</h1>
       </Link>
 
       <div className="testing-cookies-and-shit">
         {userId !== "" ? <span>CONTEXT ON</span> : <span>CONTEXT OFF</span>}
-        {userIdCookie ? <span>COOKIE ON</span> : <span>COOKIE OFF</span>}
+        {storedUserId ? <span>COOKIE ON</span> : <span>COOKIE OFF</span>}
       </div>
 
       <nav className="nav-container">
@@ -70,12 +67,10 @@ function Header() {
         <Link to="/about" className="header-link">
           A Propos
         </Link>
-        <Link to="/CreateUser" className="header-link">
-          test
-        </Link>
-        {userIdCookie ? (
+
+        {storedUserId ? (
           <>
-            <Link to={`/profil/${userIdCookie}`} className="header-link">
+            <Link to={`/profil/${storedUserId}`} className="header-link">
               Profil
             </Link>
             <button className="header-button" onClick={logout}>

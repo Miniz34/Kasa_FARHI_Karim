@@ -12,6 +12,8 @@ interface FormData {
   houseId: number;
 }
 
+const storedUserId = parseInt(localStorage.getItem("userId"));
+
 const initialFormData: FormData = {
   title: "",
   description: "",
@@ -19,7 +21,7 @@ const initialFormData: FormData = {
   pictures: [],
   equipments: [],
   pictureInputs: [],
-  userId: 0,
+  userId: storedUserId,
   houseId: 0,
 };
 

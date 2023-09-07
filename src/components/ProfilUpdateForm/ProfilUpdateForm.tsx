@@ -1,7 +1,6 @@
 import React, { createRef, useContext } from "react";
 import { useNavigate, NavLink, useParams } from "react-router-dom";
 import { Validations } from "../../../src/utils/validation/validation";
-import { useCookies } from "react-cookie";
 
 import USER_API from "../../utils/api/Users";
 import { ModalContext } from "modal-kf-react/ModalProvider";
@@ -25,10 +24,9 @@ function ProfileUpdateForm({
     // if fail -> show error message
   };
 
-  const [cookies] = useCookies(["darkTheme", "userId", "jwToken"]);
+  const storedUserId = localStorage.getItem("userId");
+  const storedJwToken = localStorage.getItem("jwToken");
 
-  const userIdCookie = cookies.userId;
-  const jwTokenCookie = cookies.jwToken;
   const id = userId;
   const { open } = useContext(ModalContext);
   const { DisplayModal } = useContext(ModalContext);
@@ -49,7 +47,7 @@ function ProfileUpdateForm({
       email: email,
       firstName: firstName,
       lastName: lastName,
-      jwToken: jwTokenCookie,
+      jwToken: storedJwToken,
     });
     //TODO : response toujours success, faire validations, conditions dans l'api et le backend
     if (response.success) {

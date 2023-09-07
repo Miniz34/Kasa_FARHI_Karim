@@ -1,5 +1,4 @@
 import React, { useState, createRef } from "react";
-import { useCookies } from "react-cookie";
 import HOUSE_API from "../utils/api/House";
 
 interface FormDataDeux {
@@ -12,10 +11,7 @@ interface FormDataDeux {
 }
 
 const NewHouse: React.FC = () => {
-  const [cookies] = useCookies(["userId"]);
-
-  const id = cookies.userId;
-  console.log(id);
+  const storedUserid = localStorage.getItem("userId");
 
   const [formDataDeux, setFormDataDeux] = useState<FormDataDeux>({
     title: "",
@@ -23,7 +19,7 @@ const NewHouse: React.FC = () => {
     location: "",
     pictures: [], // Initialize the pictures array
     equipments: [], // Initialize the equipments array
-    userId: id,
+    userId: storedUserid,
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

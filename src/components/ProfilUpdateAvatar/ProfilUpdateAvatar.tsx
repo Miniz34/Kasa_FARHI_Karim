@@ -1,4 +1,3 @@
-import { useCookies } from "react-cookie";
 import React, { createRef, useContext, useState } from "react";
 import { useNavigate, NavLink, useParams } from "react-router-dom";
 import { Validations } from "../../../src/utils/validation/validation";
@@ -16,8 +15,7 @@ function ProfilUpdateAvatar({ userId }: ProfileUpdateAvatarProps) {
   const { DisplayModal } = useContext(ModalContext);
   const { open } = useContext(ModalContext);
 
-  const [cookies] = useCookies(["darkTheme", "userId", "jwToken"]);
-  const jwTokenCookie = cookies.jwToken;
+  const storedJwToken = localStorage.getItem("jwToken");
 
   const [errorAvatar, setErrorAvatar] = useState(false);
   const [filePreview, setFilePreview] = useState(null);
@@ -103,7 +101,7 @@ function ProfilUpdateAvatar({ userId }: ProfileUpdateAvatarProps) {
     const response = await USER_API.updateAvatar({
       userId: id,
       formData,
-      jwToken: jwTokenCookie,
+      jwToken: storedJwToken,
     });
     console.log(response);
 

@@ -1,5 +1,4 @@
 import { useParams } from "react-router-dom";
-import { useCookies } from "react-cookie";
 import React, { useContext, useEffect, useState } from "react";
 import Error from "./Error";
 import { useFetch } from "../utils/hooks/Fetch";
@@ -10,7 +9,6 @@ const Profil: React.FC = () => {
   const { id } = useParams();
   const userId = parseInt(id, 10);
 
-  const [cookies] = useCookies(["darkTheme", "userId", "jwToken"]);
   const [user, setUser] = useState({
     firstName: "",
     lastName: "",
@@ -18,9 +16,8 @@ const Profil: React.FC = () => {
     avatar:
       "https://pro.destination-vendeegrandlittoral.com/wp-content/uploads/sites/2/2019/09/avatar.jpg",
     email: "",
+    houseData: [],
   });
-
-  const userIdCookie = cookies.userId;
 
   useEffect(() => {
     const getUser = async () => {
@@ -33,7 +30,9 @@ const Profil: React.FC = () => {
             userId: response.user.userId,
             avatar: response.user.avatar,
             email: response.user.email,
+            houseData: response.user.houseData,
           });
+          console.log(user);
         } else {
           console.log("not connected for some reason ...", response);
         }
@@ -44,6 +43,7 @@ const Profil: React.FC = () => {
     getUser();
   }, [userId]);
 
+  //TODO : finir display des houses
   return (
     <>
       <>
@@ -54,6 +54,17 @@ const Profil: React.FC = () => {
           userId={user.userId}
           avatar={user.avatar}
         />
+
+        <div className="house-wrapper">
+          {user.houseData.map((house, index) => (
+            <div key={index}>
+              {/* Render each property of the house object here */}
+              <p>House title: {house.title}</p>
+              <p>House description: {house.description}</p>
+              {/* Add more properties as needed */}
+            </div>
+          ))}
+        </div>
       </>
     </>
   );

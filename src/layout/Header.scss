@@ -1,8 +1,20 @@
+@import "../utils/styles/colors.scss";
+
 .header-container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   margin-top: 2%;
+}
+
+.header-title {
+  text-decoration: none;
+  .header-title-content {
+    font-family: "Delius Unicase", cursive;
+    font-weight: 700;
+    font-size: 52px;
+    color: $primary-color;
+  }
 }
 
 .header-container-hide {
@@ -26,7 +38,7 @@
 
 .header-link {
   padding: 10px 15px;
-  color: #ff6060;
+  color: $primary-color;
   text-decoration: none;
   font-size: 18px;
   text-align: center;
@@ -45,7 +57,7 @@
 
 .header-button {
   padding: 10px 15px;
-  color: #ff6060;
+  color: $primary-color;
   text-decoration: none;
   font-size: 18px;
   text-align: center;
@@ -66,8 +78,6 @@
 }
 
 .header-logo {
-  /* Your default styles here */
-
   @media only screen and (max-width: 762px) {
     width: 150px;
   }

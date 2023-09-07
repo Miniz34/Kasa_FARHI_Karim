@@ -49,7 +49,7 @@ function House() {
     const getHouse = async () => {
       console.log("in function");
       try {
-        const response = await HOUSE_API.findOnet({ id: homeId });
+        const response = await HOUSE_API.findOne({ id: homeId });
         if (response.success) {
           setData({
             title: response.data.title,

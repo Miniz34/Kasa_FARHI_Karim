@@ -11,18 +11,13 @@ import { Validations } from "../../utils/validation/validation";
 
 // user API
 import API_USER from "../../utils/api/Users";
-import { useCookies } from "react-cookie";
 
 const Register: React.FC = () => {
   const { UpdateContext } = useContext(HomiContext);
   const { open } = useContext(ModalContext);
   const { DisplayModal } = useContext(ModalContext);
   const { darkTheme, userId, jwToken } = useContext(HomiContext);
-  const [cookies, setCookie, removeCookie] = useCookies([
-    "darkTheme",
-    "userId",
-    "jwToken",
-  ]);
+
   const [emailValid, setEmailValid] = useState(true);
   const [firstNameValid, setFirstNameValid] = useState(true);
   const [lastNameValid, setLastNameValid] = useState(true);
@@ -91,9 +86,7 @@ const Register: React.FC = () => {
           userId: response.id,
           jwToken: response.token,
         });
-        // setCookie("darkTheme", darkTheme);
-        // setCookie("userId", userId);
-        // setCookie("jwToken", jwToken);
+
         console.log(darkTheme, userId, jwToken);
         DisplayModal({
           mode: "info",

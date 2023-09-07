@@ -3,7 +3,6 @@ import React, { createRef, useContext, useState } from "react";
 import USER_API from "../../utils/api/Users";
 import { useParams } from "react-router-dom";
 
-import { useCookies } from "react-cookie";
 import { ModalContext } from "modal-kf-react/ModalProvider";
 import ProfileUpdateForm from "../ProfilUpdateForm/ProfilUpdateForm";
 
@@ -26,11 +25,10 @@ function ProfileCard({
 }: ProfileCardProps) {
   const { id } = useParams();
   const user_Id = parseInt(id, 10);
+  const storedId = parseInt(localStorage.getItem("userId"));
+  console.log(user_Id, storedId);
   const { DisplayModal } = useContext(ModalContext);
   const { open } = useContext(ModalContext);
-
-  const [cookies] = useCookies(["darkTheme", "userId", "jwToken"]);
-  const userIdCookie = cookies.userId;
 
   const showModal = () => {
     DisplayModal({
@@ -75,15 +73,15 @@ function ProfileCard({
             <p>Last Name: {lastName}</p>
             <p>Email: {email}</p>
           </div>
-          {user_Id === userIdCookie ? (
+          {user_Id === storedId ? (
             <button onClick={showModal}>Update Profile</button>
           ) : null}
         </div>
-        <div className="house-wrapper">
+        {/* <div className="house-wrapper">
           <p>First House :House name this is a house youhou description</p>
           <p>Second house :House name this is a house youhou description</p>
           <p>Third house :House name this is a house youhou description</p>
-        </div>
+        </div> */}
       </div>
     </>
   );
