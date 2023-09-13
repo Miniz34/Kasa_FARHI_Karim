@@ -42,7 +42,7 @@ const CreateHouse = async ({ formData }) => {
   // Append picture files to the FormData object
   //TODO : fonctionne pas avec index dans le payload
   formData.pictures.forEach((file, index) => {
-    data.append(`inputFile`, file);
+    data.append(`inputFiles`, file);
   });
 
   return await fetch(process.env.REACT_APP_API_URL_DEV + `/house/`, {

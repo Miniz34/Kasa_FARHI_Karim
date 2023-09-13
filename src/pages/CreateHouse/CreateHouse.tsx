@@ -157,12 +157,12 @@ const NewHouse: React.FC = () => {
         />
       </div>
       <div>
-        <label htmlFor="inputFile">Pictures:</label>
+        <label htmlFor="inputFiles">Pictures:</label>
         <input
           type="file"
-          name="inputFile"
+          name="inputFiles"
           accept="image/*"
-          id="inputFile"
+          id="inputFiles"
           multiple
           onChange={handleFileInputChange}
         />
@@ -203,3 +203,5 @@ const NewHouse: React.FC = () => {
 };
 
 export default NewHouse;
+
+//formik

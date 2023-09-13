@@ -1,0 +1,52 @@
+@import "../../utils/styles/colors.scss";
+
+.profile-house {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+  width: 60%;
+  background-color: rgb(229, 229, 229);
+  margin-top: 50px;
+  height: 100%;
+  border-radius: 15px;
+  border: solid black 1px;
+}
+
+.profile-house-card {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.profile-house-text {
+  padding-left: 15px;
+}
+
+.profile-redirect {
+  text-decoration: none;
+  transition: transform 0.3s ease;
+  margin-bottom: 150px;
+
+  :hover.profile-house {
+    transform: scale(1.05); /* Scale up by 5% on hover */
+  }
+}
+
+.profile-house-card-title {
+  text-decoration: none;
+}
+
+.profile-house-card-description {
+}
+
+.profile-house-card-img > img {
+  margin-top: 4px;
+  padding-right: 15px;
+  height: 70px;
+  width: 70px;
+}

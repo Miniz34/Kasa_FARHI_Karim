@@ -1,6 +1,6 @@
 import React, { createRef, useContext, useState } from "react";
 import { useNavigate, NavLink, useParams } from "react-router-dom";
-import { Validations } from "../../../src/utils/validation/validation";
+import { Validations } from "../../utils/validation/validation";
 
 import USER_API from "../../utils/api/Users";
 import { ModalContext } from "modal-kf-react/ModalProvider";

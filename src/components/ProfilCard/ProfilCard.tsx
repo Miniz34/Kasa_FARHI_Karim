@@ -4,9 +4,9 @@ import USER_API from "../../utils/api/Users";
 import { useParams } from "react-router-dom";
 
 import { ModalContext } from "modal-kf-react/ModalProvider";
-import ProfileUpdateForm from "../ProfilUpdateForm/ProfilUpdateForm";
+import ProfileUpdateForm from "../ProfileUpdateForm/ProfilUpdateForm";
 
-import ProfilUpdateAvatar from "../ProfilUpdateAvatar/ProfilUpdateAvatar";
+import ProfilUpdateAvatar from "../ProfileUpdateAvatar/ProfilUpdateAvatar";
 
 interface ProfileCardProps {
   firstName: string;

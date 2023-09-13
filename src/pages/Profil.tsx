@@ -4,6 +4,7 @@ import Error from "./Error";
 import { useFetch } from "../utils/hooks/Fetch";
 import USER_API from "../utils/api/Users";
 import ProfileCard from "../components/ProfilCard/ProfilCard";
+import ProfileHouseCard from "../components/ProfileHouseCard/ProfileHouseCard";
 
 const Profil: React.FC = () => {
   const { id } = useParams();
@@ -43,6 +44,8 @@ const Profil: React.FC = () => {
     getUser();
   }, [userId]);
 
+  console.log(user);
+
   //TODO : finir display des houses
   return (
     <>
@@ -55,16 +58,25 @@ const Profil: React.FC = () => {
           avatar={user.avatar}
         />
 
+        {user.houseData.map((house, index) => (
+          <ProfileHouseCard
+            key={index}
+            id={house.houseId}
+            title={house.title}
+            description={house.description}
+            picture={house.firstPicture}
+          />
+        ))}
+
+        {/* 
         <div className="house-wrapper">
           {user.houseData.map((house, index) => (
             <div key={index}>
-              {/* Render each property of the house object here */}
               <p>House title: {house.title}</p>
               <p>House description: {house.description}</p>
-              {/* Add more properties as needed */}
             </div>
           ))}
-        </div>
+        </div> */}
       </>
     </>
   );
